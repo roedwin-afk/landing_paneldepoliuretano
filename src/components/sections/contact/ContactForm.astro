@@ -1,0 +1,175 @@
+---
+import Animate from "../../ui/Animate.astro";
+import { Send } from "lucide-astro";
+import { texts } from "../../../content/texts";
+
+const { contact } = texts;
+---
+
+<Animate animation="fade-right">
+    <div class="contact-card">
+        <h2 class="contact-card__title">Envíenos un mensaje</h2>
+        <form class="contact-form" novalidate>
+            <div class="contact-form__grid">
+                <div class="contact-form__field">
+                    <label class="contact-form__label" for="name">
+                        {contact.fields.name}
+                    </label>
+                    <input
+                        id="name"
+                        type="text"
+                        class="contact-form__input"
+                        autocomplete="organization"
+                        placeholder="Ej. Constructora García S.A."
+                    />
+                </div>
+
+                <div class="contact-form__field">
+                    <label class="contact-form__label" for="email">
+                        {contact.fields.email}
+                    </label>
+                    <input
+                        id="email"
+                        type="email"
+                        class="contact-form__input"
+                        autocomplete="email"
+                        placeholder="correo@empresa.com"
+                    />
+                </div>
+
+                <div class="contact-form__field contact-form__field--full">
+                    <label class="contact-form__label" for="material">
+                        {contact.fields.material}
+                    </label>
+                    <select id="material" class="contact-form__select">
+                        {
+                            contact.options.map((option) => (
+                                <option value={option}>{option}</option>
+                            ))
+                        }
+                    </select>
+                </div>
+
+                <div class="contact-form__field contact-form__field--full">
+                    <label class="contact-form__label" for="details">
+                        {contact.fields.details}
+                    </label>
+                    <textarea
+                        id="details"
+                        class="contact-form__textarea"
+                        rows={5}
+                        placeholder="Descríbanos su proyecto: superficie aproximada, ubicación, tipo de construcción..."
+                    ></textarea>
+                </div>
+
+                <div class="contact-form__field contact-form__field--full">
+                    <button type="submit" class="contact-form__submit">
+                        <Send size={18} />
+                        {contact.submit}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</Animate>
+
+<style>
+    .contact-card {
+        background-color: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-xl);
+        padding: var(--space-8);
+        box-shadow: var(--shadow-md);
+        height: 100%;
+    }
+
+    .contact-card__title {
+        font-size: var(--text-xl);
+        font-weight: 700;
+        color: var(--color-dark);
+        margin-bottom: var(--space-6);
+        padding-bottom: var(--space-4);
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .contact-form__grid {
+        display: grid;
+        gap: var(--space-5);
+    }
+
+    .contact-form__field {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+    }
+
+    .contact-form__field--full {
+        grid-column: 1 / -1;
+    }
+
+    .contact-form__label {
+        font-size: var(--text-sm);
+        font-weight: 600;
+        color: var(--color-text);
+    }
+
+    .contact-form__input,
+    .contact-form__select,
+    .contact-form__textarea {
+        width: 100%;
+        padding: var(--space-3) var(--space-4);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        font-family: var(--font-base);
+        font-size: var(--text-sm);
+        color: var(--color-text);
+        background-color: var(--color-surface);
+        transition: var(--transition);
+        outline: none;
+    }
+
+    .contact-form__input::placeholder,
+    .contact-form__textarea::placeholder {
+        color: var(--color-dark-muted);
+    }
+
+    .contact-form__input:focus,
+    .contact-form__select:focus,
+    .contact-form__textarea:focus {
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 3px rgb(30 58 138 / 0.1);
+    }
+
+    .contact-form__textarea {
+        resize: vertical;
+        min-height: 8rem;
+    }
+
+    .contact-form__submit {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-2);
+        width: 100%;
+        background-color: var(--color-primary);
+        color: white;
+        font-size: var(--text-base);
+        font-weight: 700;
+        padding: var(--space-4);
+        border-radius: var(--radius-md);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        transition: var(--transition);
+    }
+
+    .contact-form__submit:hover {
+        background-color: var(--color-primary-dark);
+        transform: translateY(-1px);
+    }
+
+    @media (min-width: 768px) {
+        .contact-form__grid {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+</style>

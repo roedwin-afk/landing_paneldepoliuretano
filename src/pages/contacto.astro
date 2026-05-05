@@ -1,0 +1,63 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/layout/Navbar.astro";
+import Footer from "../components/layout/Footer.astro";
+import ContactHero from "../components/sections/contact/ContactHero.astro";
+import ContactForm from "../components/sections/contact/ContactForm.astro";
+import ContactInfo from "../components/sections/contact/ContactInfo.astro";
+import ContactMap from "../components/sections/contact/ContactMap.astro";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout
+  title="Contacto | paneldepoliuretano.com"
+  description="Contáctenos para solicitar una cotización técnica de paneles sandwich PUR, PIR o lana de roca para su proyecto industrial."
+>
+  <Navbar />
+
+  <main>
+    <ContactHero />
+
+    <!-- Formulario + Info -->
+    <section class="contact-top">
+      <div class="container contact-top__grid">
+        <ContactForm />
+        <ContactInfo />
+      </div>
+    </section>
+
+    <!-- Mapa full width -->
+    <section class="contact-map-section">
+      <div class="container">
+        <ContactMap />
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .contact-top {
+    background-color: var(--color-bg);
+    padding-block: var(--space-16);
+  }
+
+  .contact-top__grid {
+    display: grid;
+    gap: var(--space-8);
+  }
+
+  .contact-map-section {
+    background-color: var(--color-bg);
+    padding-bottom: var(--space-16);
+  }
+
+  @media (min-width: 1024px) {
+  .contact-top__grid {
+    grid-template-columns: 6fr 5fr;
+    /* sin align-items */
+  }
+}
+</style>

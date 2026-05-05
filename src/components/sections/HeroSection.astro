@@ -1,0 +1,193 @@
+---
+import Animate from "../ui/Animate.astro";
+import { Table, FileText } from "lucide-astro";
+import { texts } from "../../content/texts";
+
+const { hero } = texts;
+---
+
+<section class="hero">
+  <div class="container hero__inner">
+    <!-- Contenido -->
+    <Animate animation="fade-right" duration={700}>
+      <div class="hero__content">
+        <span class="hero__badge">{hero.badge}</span>
+        <h1 class="hero__title">{hero.title}</h1>
+        <p class="hero__description">{hero.description}</p>
+        <div class="hero__actions">
+          <a href="/#comparativa" class="hero__btn hero__btn--primary">
+            <Table size={18} />
+            {hero.ctaPrimary}
+          </a>
+          <a href="#" class="hero__btn hero__btn--secondary">
+            <FileText size={18} />
+            {hero.ctaSecondary}
+          </a>
+        </div>
+      </div>
+    </Animate>
+
+    <!-- Imagen -->
+    <Animate animation="fade-left" duration={700} delay={150}>
+      <div class="hero__media">
+        <div class="hero__image-wrapper">
+          <img
+            src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop"
+            alt="Instalación de paneles industriales"
+            class="hero__image"
+            loading="eager"
+          />
+        </div>
+        <div class="hero__stat">
+          <p class="hero__stat-value">{hero.stat.value}</p>
+          <p class="hero__stat-label">{hero.stat.label}</p>
+        </div>
+      </div>
+    </Animate>
+  </div>
+</section>
+
+<style>
+  .hero {
+    background-color: var(--color-surface);
+    padding-block: var(--space-16);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero__inner {
+    display: grid;
+    gap: var(--space-12);
+    align-items: center;
+  }
+
+  /* Badge */
+  .hero__badge {
+    display: inline-block;
+    padding: var(--space-1) var(--space-3);
+    background-color: #dbeafe;
+    color: #1e40af;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    border-radius: 9999px;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-4);
+  }
+
+  /* Title */
+  .hero__title {
+    font-size: var(--text-4xl);
+    font-weight: 900;
+    color: var(--color-dark);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-6);
+  }
+
+  /* Description */
+  .hero__description {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-8);
+    line-height: 1.7;
+  }
+
+  /* Actions */
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .hero__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+  }
+
+  .hero__btn--primary {
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  .hero__btn--primary:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-1px);
+  }
+
+  .hero__btn--secondary {
+    border: 2px solid var(--color-border);
+    color: var(--color-text);
+    background-color: transparent;
+  }
+
+  .hero__btn--secondary:hover {
+    background-color: var(--color-bg-alt);
+  }
+
+  /* Media */
+  .hero__media {
+    position: relative;
+  }
+
+  .hero__image-wrapper {
+    border-radius: var(--radius-2xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
+  }
+
+  .hero__image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .hero__stat {
+    display: none;
+    position: absolute;
+    bottom: -1.5rem;
+    left: -1.5rem;
+    background-color: var(--color-accent);
+    color: white;
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .hero__stat-value {
+    font-size: var(--text-3xl);
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .hero__stat-label {
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.85;
+    margin-top: var(--space-1);
+  }
+
+  /* Responsive */
+  @media (min-width: 768px) {
+    .hero {
+      padding-block: var(--space-24);
+    }
+
+    .hero__inner {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .hero__title {
+      font-size: var(--text-5xl);
+    }
+
+    .hero__stat {
+      display: block;
+    }
+  }
+</style>

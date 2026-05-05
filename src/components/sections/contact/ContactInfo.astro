@@ -1,0 +1,136 @@
+---
+import Animate from "../../ui/Animate.astro";
+import { Phone, Mail, MapPin, Clock } from "lucide-astro";
+import { texts } from "../../../content/texts";
+
+const { contact } = texts;
+---
+
+<Animate animation="fade-left" delay={100}>
+  <div class="contact-card">
+    <h2 class="contact-card__title">Información de contacto</h2>
+    <ul class="contact-info">
+
+      <li class="contact-info__item">
+        <span class="contact-info__icon">
+          <Phone size={20} />
+        </span>
+        <div>
+          <p class="contact-info__label">Teléfono</p>
+          <a href={contact.info.phoneHref} class="contact-info__value contact-info__value--link">
+            {contact.info.phone}
+          </a>
+        </div>
+      </li>
+
+      <li class="contact-info__item">
+        <span class="contact-info__icon">
+          <Mail size={20} />
+        </span>
+        <div>
+          <p class="contact-info__label">Email</p>
+          <a href={"mailto:" + contact.info.email} class="contact-info__value contact-info__value--link">
+            {contact.info.email}
+          </a>
+        </div>
+      </li>
+
+      <li class="contact-info__item">
+        <span class="contact-info__icon">
+          <Clock size={20} />
+        </span>
+        <div>
+          <p class="contact-info__label">Horario</p>
+          <p class="contact-info__value">{contact.info.hours}</p>
+        </div>
+      </li>
+
+      <li class="contact-info__item">
+        <span class="contact-info__icon">
+          <MapPin size={20} />
+        </span>
+        <div>
+          <p class="contact-info__label">Dirección</p>
+          
+           <a href={contact.info.mapsHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-info__value contact-info__value--link"
+          >
+            {contact.info.address}
+          </a>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+</Animate>
+
+<style>
+  .contact-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    box-shadow: var(--shadow-md);
+    height: 100%;
+  }
+
+  .contact-card__title {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .contact-info {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .contact-info__item {
+    display: flex;
+    gap: var(--space-4);
+    align-items: flex-start;
+  }
+
+  .contact-info__icon {
+    flex-shrink: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: #dbeafe;
+    color: var(--color-primary);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .contact-info__label {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-1);
+  }
+
+  .contact-info__value {
+    font-size: var(--text-sm);
+    color: var(--color-text);
+    line-height: 1.5;
+  }
+
+  .contact-info__value--link {
+    color: var(--color-primary);
+    transition: var(--transition);
+  }
+
+  .contact-info__value--link:hover {
+    color: var(--color-accent);
+  }
+</style>

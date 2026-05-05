@@ -1,0 +1,141 @@
+---
+import NavLinks from "../ui/NavLinks.astro";
+import MobileMenu from "./MobileMenu.astro";
+import { texts } from "../../content/texts";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<header class="navbar">
+  <div class="container navbar__inner">
+    <!-- Logo -->
+    <a href={base} class="navbar__logo">
+      PANEL<span class="navbar__logo--accent">DE</span>POLIURETANO<span
+        class="navbar__logo--muted">.com</span
+      >
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="navbar__desktop" aria-label="Navegación principal">
+      <NavLinks variant="navbar" />
+      <a href=`${base}contacto` class="navbar__cta">
+        {texts.nav.cta}
+      </a>
+    </nav>
+
+    <!-- Hamburger -->
+    <button
+      class="navbar__hamburger"
+      id="hamburger-btn"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span class="navbar__hamburger-bar"></span>
+      <span class="navbar__hamburger-bar"></span>
+      <span class="navbar__hamburger-bar"></span>
+    </button>
+  </div>
+</header>
+
+<MobileMenu />
+
+<style>
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .navbar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem;
+  }
+
+  .navbar__logo {
+    font-size: var(--text-xl);
+    font-weight: 800;
+    color: var(--color-primary);
+    letter-spacing: -0.02em;
+  }
+
+  .navbar__logo--accent {
+    color: var(--color-accent);
+  }
+
+  .navbar__logo--muted {
+    color: var(--color-dark-muted);
+    font-weight: 400;
+  }
+
+  .navbar__desktop {
+    display: none;
+    align-items: center;
+    gap: var(--space-8);
+  }
+
+  .navbar__cta {
+    background-color: var(--color-primary);
+    color: white;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+    white-space: nowrap;
+  }
+
+  .navbar__cta:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-1px);
+  }
+
+  /* Hamburger */
+  .navbar__hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+  }
+
+  .navbar__hamburger-bar {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-text);
+    border-radius: 2px;
+    transition: var(--transition);
+  }
+
+  .navbar__hamburger[aria-expanded="true"]
+    .navbar__hamburger-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .navbar__hamburger[aria-expanded="true"]
+    .navbar__hamburger-bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .navbar__hamburger[aria-expanded="true"]
+    .navbar__hamburger-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  @media (min-width: 768px) {
+    .navbar__desktop {
+      display: flex;
+    }
+
+    .navbar__hamburger {
+      display: none;
+    }
+  }
+</style>

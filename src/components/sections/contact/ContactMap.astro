@@ -1,0 +1,120 @@
+---
+import Animate from "../../ui/Animate.astro";
+import { texts } from "../../../content/texts";
+
+const { map } = texts.contact;
+---
+
+<Animate animation="fade-left" delay={200}>
+    <div class="map-card">
+        <div id="map" class="map-card__map"></div>
+    </div>
+</Animate>
+
+<style>
+    .map-card {
+        background-color: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-xl);
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+    }
+
+    .map-card__map {
+        height: 24rem;
+        width: 100%;
+    }
+
+    @media (min-width: 1024px) {
+        .map-card__map {
+            height: 32rem;
+        }
+    }
+</style>
+
+<script
+    define:vars={{
+        lat: map.lat,
+        lng: map.lng,
+        zoom: map.zoom,
+        markerColor: map.markerColor,
+    }}
+>
+    function loadLeaflet() {
+        return new Promise((resolve) => {
+            if (window.L) {
+                resolve(window.L);
+                return;
+            }
+
+            // CSS
+            const link = document.createElement("link");
+            link.rel = "stylesheet";
+            link.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+            document.head.appendChild(link);
+
+            // JS
+            const script = document.createElement("script");
+            script.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+            script.onload = () => resolve(window.L);
+            document.head.appendChild(script);
+        });
+    }
+
+    async function initMap() {
+        const mapEl = document.getElementById("map");
+        if (!mapEl) return;
+        if (mapEl._leaflet_id) return;
+
+        const L = await loadLeaflet();
+
+        const leafletMap = L.map("map", {
+            center: [lat, lng],
+            zoom: zoom,
+            scrollWheelZoom: false,
+            zoomControl: true,
+        });
+
+        L.tileLayer(
+            "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+            {
+                attribution:
+                    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                maxZoom: 19,
+            },
+        ).addTo(leafletMap);
+
+        const icon = L.divIcon({
+            className: "",
+            html: `<div style="
+        width: 2rem;
+        height: 2rem;
+        background-color: ${markerColor};
+        border: 3px solid white;
+        border-radius: 50% 50% 50% 0;
+        transform: rotate(-45deg);
+        box-shadow: 0 2px 8px rgb(0 0 0 / 0.3);
+      "></div>`,
+            iconSize: [32, 32],
+            iconAnchor: [16, 32],
+            popupAnchor: [0, -36],
+        });
+
+        L.marker([lat, lng], { icon })
+            .addTo(leafletMap)
+            .bindPopup(
+                `<div style="font-family: Inter, sans-serif; padding: 0.25rem;">
+          <strong style="color: #1e3a8a; display: block; margin-bottom: 0.25rem;">
+            paneldepoliuretano.com
+          </strong>
+          <span style="font-size: 0.8rem; color: #64748b;">
+            Av. Presidente Masaryk No. 61, Int. 901<br/>
+            Polanco V Sección, CDMX
+          </span>
+        </div>`,
+            )
+            .openPopup();
+    }
+
+    document.addEventListener("astro:page-load", initMap);
+</script>

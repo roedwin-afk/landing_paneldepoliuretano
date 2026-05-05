@@ -1,0 +1,97 @@
+---
+import Animate from "../ui/Animate.astro";
+import { ShieldCheck, Flame, BadgeCheck, Leaf } from "lucide-astro";
+import { texts } from "../../content/texts";
+
+const { certifications } = texts;
+
+const icons = {
+  shield: ShieldCheck,
+  fire: Flame,
+  check: BadgeCheck,
+  leaf: Leaf,
+};
+---
+
+<section id="certificaciones" class="certifications">
+  <div class="container">
+    <Animate animation="fade-up">
+      <h2 class="certifications__title">{certifications.title}</h2>
+    </Animate>
+
+    <div class="certifications__grid">
+      {
+        certifications.items.map((item, i) => {
+          const Icon = icons[item.icon as keyof typeof icons];
+          return (
+            <Animate animation="fade-up" delay={i * 100}>
+              <div class="certifications__item">
+                <div class="certifications__icon">
+                  <Icon size={40} />
+                </div>
+                <p class="certifications__label">{item.label}</p>
+              </div>
+            </Animate>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .certifications {
+    padding-block: var(--space-16);
+    background-color: var(--color-dark);
+    color: white;
+  }
+
+  .certifications__title {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-10);
+  }
+
+  .certifications__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-8);
+  }
+
+  .certifications__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    text-align: center;
+    opacity: 0.75;
+    transition: var(--transition);
+  }
+
+  .certifications__item:hover {
+    opacity: 1;
+  }
+
+  .certifications__icon {
+    color: var(--color-accent);
+  }
+
+  .certifications__label {
+    font-size: var(--text-sm);
+    font-style: italic;
+    line-height: 1.4;
+  }
+
+  @media (min-width: 768px) {
+    .certifications__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .certifications__title {
+      font-size: var(--text-3xl);
+    }
+  }
+</style>
