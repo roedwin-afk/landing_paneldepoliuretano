@@ -1,0 +1,174 @@
+---
+import Animate from "../../ui/Animate.astro";
+import { texts } from "../../../content/texts";
+
+const { comparativa } = texts;
+const { tableExtended } = comparativa;
+---
+
+<section class="comparativa-table">
+  <div class="container">
+    <Animate animation="fade-up">
+      <div class="comparativa-table__header">
+        <h2 class="comparativa-table__title">{tableExtended.title}</h2>
+        <p class="comparativa-table__subtitle">{tableExtended.subtitle}</p>
+      </div>
+    </Animate>
+
+    <Animate animation="fade-up" delay={150}>
+      <div class="comparativa-table__wrapper">
+        <table class="comparativa-table__table">
+          <thead>
+            <tr>
+              <th class="comparativa-table__th">Propiedad Técnica</th>
+              <th class="comparativa-table__th comparativa-table__th--pur">
+                <span class="comparativa-table__th-badge comparativa-table__th-badge--pur">PUR</span>
+                Poliuretano
+              </th>
+              <th class="comparativa-table__th comparativa-table__th--pir">
+                <span class="comparativa-table__th-badge comparativa-table__th-badge--pir">PIR</span>
+                Polisocianurato
+              </th>
+              <th class="comparativa-table__th comparativa-table__th--rock">
+                <span class="comparativa-table__th-badge comparativa-table__th-badge--rock">ROCK</span>
+                Lana de Roca
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              tableExtended.rows.map((row, i) => (
+                <tr class={i % 2 === 0 ? "comparativa-table__tr--even" : ""}>
+                  <td class="comparativa-table__td comparativa-table__td--label">
+                    {row.label}
+                  </td>
+                  <td class="comparativa-table__td">{row.pur}</td>
+                  <td class="comparativa-table__td">{row.pir}</td>
+                  <td class="comparativa-table__td">{row.rock}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </Animate>
+  </div>
+</section>
+
+<style>
+  .comparativa-table {
+    padding-block: var(--space-20);
+    background-color: var(--color-bg);
+  }
+
+  .comparativa-table__header {
+    text-align: center;
+    margin-bottom: var(--space-12);
+  }
+
+  .comparativa-table__title {
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    color: var(--color-dark);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+  }
+
+  .comparativa-table__subtitle {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+  }
+
+  .comparativa-table__wrapper {
+    overflow-x: auto;
+    background-color: var(--color-surface);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-md);
+  }
+
+  .comparativa-table__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+  }
+
+  /* Header */
+  .comparativa-table__th {
+    background-color: var(--color-primary);
+    color: white;
+    font-weight: 600;
+    padding: var(--space-4) var(--space-6);
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  .comparativa-table__th--pur {
+    background-color: #1e3a8a;
+  }
+
+  .comparativa-table__th--pir {
+    background-color: #1d4ed8;
+  }
+
+  .comparativa-table__th--rock {
+    background-color: #1e40af;
+  }
+
+  .comparativa-table__th-badge {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: 800;
+    padding: 2px var(--space-2);
+    border-radius: var(--radius-sm);
+    margin-right: var(--space-2);
+    letter-spacing: 0.05em;
+  }
+
+  .comparativa-table__th-badge--pur {
+    background-color: var(--color-accent);
+    color: white;
+  }
+
+  .comparativa-table__th-badge--pir {
+    background-color: #fb923c;
+    color: white;
+  }
+
+  .comparativa-table__th-badge--rock {
+    background-color: #94a3b8;
+    color: white;
+  }
+
+  /* Rows */
+  .comparativa-table__td {
+    padding: var(--space-4) var(--space-6);
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text);
+    vertical-align: middle;
+  }
+
+  .comparativa-table__td--label {
+    font-weight: 600;
+    color: var(--color-dark);
+    white-space: nowrap;
+  }
+
+  .comparativa-table__tr--even td {
+    background-color: var(--color-bg-alt);
+  }
+
+  .comparativa-table__table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .comparativa-table__table tbody tr:hover td {
+    background-color: #dbeafe;
+  }
+
+  @media (min-width: 768px) {
+    .comparativa-table__title {
+      font-size: var(--text-4xl);
+    }
+  }
+</style>

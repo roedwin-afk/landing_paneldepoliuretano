@@ -1,10 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/layout/Navbar.astro";
+import Footer from "../components/layout/Footer.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
 import ComparativeSection from "../components/sections/ComparativeSection.astro"
 import ProductsSection from "../components/sections/ProductsSection.astro"
 import CertificationsSection from "../components/sections/CertificationsSection.astro"
+import CTASection from "../components/sections/CTASection.astro"
 ---
 
 <Layout>
@@ -15,5 +17,8 @@ import CertificationsSection from "../components/sections/CertificationsSection.
 		<ComparativeSection />
 		<ProductsSection />
 		<CertificationsSection />
+		<CTASection />
 	</main>
+
+	<Footer />
 </Layout>

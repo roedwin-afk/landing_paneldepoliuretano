@@ -1,0 +1,98 @@
+---
+import Animate from "../ui/Animate.astro";
+import { ArrowRight } from "lucide-astro";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<section class="cta">
+  <div class="container">
+    <Animate animation="fade-up">
+      <div class="cta__inner">
+        <div class="cta__content">
+          <h2 class="cta__title">¿Listo para su próximo proyecto?</h2>
+          <p class="cta__subtitle">
+            Nuestro equipo técnico está disponible para asesorarle en la
+            selección del panel ideal para su aplicación.
+          </p>
+        </div>
+        <a href={`${base}contacto`} class="cta__btn">
+          Solicitar Cotización Técnica
+          <ArrowRight size={20} />
+        </a>
+      </div>
+    </Animate>
+  </div>
+</section>
+
+<style>
+  .cta {
+    background-color: var(--color-surface);
+    padding-block: var(--space-16);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .cta__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-8);
+    text-align: center;
+  }
+
+  .cta__title {
+    font-size: var(--text-3xl);
+    font-weight: 900;
+    color: var(--color-dark);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+  }
+
+  .cta__subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    max-width: 36rem;
+    line-height: 1.6;
+  }
+
+  .cta__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    background-color: var(--color-primary);
+    color: white;
+    font-size: var(--text-base);
+    font-weight: 700;
+    padding: var(--space-4) var(--space-8);
+    border-radius: var(--radius-md);
+    white-space: nowrap;
+    transition: var(--transition);
+  }
+
+  .cta__btn:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .cta__btn svg {
+    transition: var(--transition);
+  }
+
+  .cta__btn:hover svg {
+    transform: translateX(4px);
+  }
+
+  @media (min-width: 1024px) {
+    .cta__inner {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
+
+    .cta__title {
+      font-size: var(--text-4xl);
+    }
+  }
+</style>

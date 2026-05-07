@@ -1,0 +1,284 @@
+---
+import Animate from "../../ui/Animate.astro";
+import { Thermometer, Flame, ShieldCheck, Check, X } from "lucide-astro";
+import { texts } from "../../../content/texts";
+
+const { comparativa } = texts;
+const { guide } = comparativa;
+
+const icons = {
+  thermometer: Thermometer,
+  flame: Flame,
+  shield: ShieldCheck,
+};
+
+const colors = {
+  blue: {
+    badge: "badge--blue",
+    icon: "icon--blue",
+    border: "card--blue",
+  },
+  orange: {
+    badge: "badge--orange",
+    icon: "icon--orange",
+    border: "card--orange",
+  },
+  gray: {
+    badge: "badge--gray",
+    icon: "icon--gray",
+    border: "card--gray",
+  },
+};
+---
+
+<section class="comparativa-guide">
+  <div class="container">
+    <Animate animation="fade-up">
+      <div class="comparativa-guide__header">
+        <h2 class="comparativa-guide__title">{guide.title}</h2>
+        <p class="comparativa-guide__subtitle">{guide.subtitle}</p>
+      </div>
+    </Animate>
+
+    <div class="comparativa-guide__grid">
+      {
+        guide.items.map((item, i) => {
+          const Icon = icons[item.icon as keyof typeof icons];
+          const color = colors[item.color as keyof typeof colors];
+          return (
+            <Animate animation="fade-up" delay={i * 100}>
+              <div class={`guide-card ${color.border}`}>
+                <div class="guide-card__header">
+                  <div class={`guide-card__icon ${color.icon}`}>
+                    <Icon size={24} />
+                  </div>
+                  <span class={`guide-card__badge ${color.badge}`}>
+                    {item.material}
+                  </span>
+                </div>
+
+                <p class="guide-card__when">{item.when}</p>
+
+                <div class="guide-card__lists">
+                  <div class="guide-card__list">
+                    <p class="guide-card__list-title guide-card__list-title--ideal">
+                      Ideal para
+                    </p>
+                    <ul>
+                      {item.ideal.map((point) => (
+                        <li class="guide-card__list-item">
+                          <span class="guide-card__list-icon guide-card__list-icon--check">
+                            <Check size={14} />
+                          </span>
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div class="guide-card__list">
+                    <p class="guide-card__list-title guide-card__list-title--avoid">
+                      Evitar cuando
+                    </p>
+                    <ul>
+                      {item.avoid.map((point) => (
+                        <li class="guide-card__list-item">
+                          <span class="guide-card__list-icon guide-card__list-icon--x">
+                            <X size={14} />
+                          </span>
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </Animate>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .comparativa-guide {
+    padding-block: var(--space-20);
+    background-color: var(--color-bg);
+  }
+
+  .comparativa-guide__header {
+    text-align: center;
+    margin-bottom: var(--space-12);
+  }
+
+  .comparativa-guide__title {
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    color: var(--color-dark);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+  }
+
+  .comparativa-guide__subtitle {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+  }
+
+  .comparativa-guide__grid {
+    display: grid;
+    gap: var(--space-8);
+  }
+
+  /* Card */
+  .guide-card {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-border);
+    border-top-width: 4px;
+    padding: var(--space-8);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .card--blue {
+    border-top-color: var(--color-primary);
+  }
+
+  .card--orange {
+    border-top-color: var(--color-accent);
+  }
+
+  .card--gray {
+    border-top-color: #64748b;
+  }
+
+  /* Header */
+  .guide-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .guide-card__icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .icon--blue {
+    background-color: #dbeafe;
+    color: var(--color-primary);
+  }
+
+  .icon--orange {
+    background-color: #ffedd5;
+    color: var(--color-accent);
+  }
+
+  .icon--gray {
+    background-color: #f1f5f9;
+    color: #64748b;
+  }
+
+  .guide-card__badge {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    padding: var(--space-1) var(--space-3);
+    border-radius: 9999px;
+  }
+
+  .badge--blue {
+    background-color: #dbeafe;
+    color: var(--color-primary);
+  }
+
+  .badge--orange {
+    background-color: #ffedd5;
+    color: var(--color-accent);
+  }
+
+  .badge--gray {
+    background-color: #f1f5f9;
+    color: #64748b;
+  }
+
+  /* When */
+  .guide-card__when {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    font-style: italic;
+    padding: var(--space-4);
+    background-color: var(--color-bg);
+    border-radius: var(--radius-md);
+    border-left: 3px solid var(--color-border);
+  }
+
+  /* Lists */
+  .guide-card__lists {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .guide-card__list-title {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-3);
+  }
+
+  .guide-card__list-title--ideal {
+    color: #16a34a;
+  }
+
+  .guide-card__list-title--avoid {
+    color: #dc2626;
+  }
+
+  .guide-card__list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--color-text);
+    margin-bottom: var(--space-2);
+    line-height: 1.5;
+  }
+
+  .guide-card__list-icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .guide-card__list-icon--check {
+    color: #16a34a;
+  }
+
+  .guide-card__list-icon--x {
+    color: #dc2626;
+  }
+
+  @media (min-width: 768px) {
+    .comparativa-guide__title {
+      font-size: var(--text-4xl);
+    }
+
+    .guide-card__lists {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .comparativa-guide__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

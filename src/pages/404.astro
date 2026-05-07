@@ -1,0 +1,198 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/layout/Navbar.astro";
+import Footer from "../components/layout/Footer.astro";
+import { ArrowLeft, FileSearch } from "lucide-astro";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout
+  title="404 — Página no encontrada | paneldepoliuretano.com"
+  description="La página que busca no existe o ha sido movida."
+>
+  <Navbar />
+
+  <main class="not-found">
+    <div class="container not-found__inner">
+      <div class="not-found__icon">
+        <FileSearch size={64} />
+      </div>
+      <span class="not-found__code">404</span>
+      <h1 class="not-found__title">Página no encontrada</h1>
+      <p class="not-found__description">
+        La página que busca no existe o ha sido movida. Puede volver al inicio
+        o consultar nuestras secciones principales.
+      </p>
+      <div class="not-found__actions">
+        <a href={`${base}`} class="not-found__btn not-found__btn--primary">
+          <ArrowLeft size={18} />
+          Volver al inicio
+        </a>
+        
+          href={`${base}contacto`}
+          class="not-found__btn not-found__btn--secondary"
+        >
+          Ir a Contacto
+        </a>
+      </div>
+
+      <!-- Links rápidos -->
+      <div class="not-found__links">
+        <p class="not-found__links-title">Secciones principales</p>
+        <div class="not-found__links-grid">
+          <a href={`${base}#comparativa`} class="not-found__link">
+            Comparativa técnica
+          </a>
+          <a href={`${base}#productos`} class="not-found__link">
+            Productos
+          </a>
+          <a href={`${base}#certificaciones`} class="not-found__link">
+            Certificaciones
+          </a>
+          <a href={`${base}contacto`} class="not-found__link">
+            Contacto
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .not-found {
+    background-color: var(--color-bg);
+    min-height: calc(100vh - 4rem);
+    display: flex;
+    align-items: center;
+  }
+
+  .not-found__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-block: var(--space-20);
+    gap: var(--space-4);
+  }
+
+  .not-found__icon {
+    color: var(--color-accent);
+    margin-bottom: var(--space-2);
+  }
+
+  .not-found__code {
+    font-size: 6rem;
+    font-weight: 900;
+    color: var(--color-primary);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    opacity: 0.15;
+    margin-top: calc(var(--space-4) * -1);
+  }
+
+  .not-found__title {
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    color: var(--color-dark);
+    letter-spacing: -0.02em;
+  }
+
+  .not-found__description {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    max-width: 32rem;
+    line-height: 1.6;
+  }
+
+  .not-found__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    justify-content: center;
+    margin-top: var(--space-4);
+  }
+
+  .not-found__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+  }
+
+  .not-found__btn--primary {
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  .not-found__btn--primary:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-1px);
+  }
+
+  .not-found__btn--secondary {
+    border: 2px solid var(--color-border);
+    color: var(--color-text);
+  }
+
+  .not-found__btn--secondary:hover {
+    background-color: var(--color-bg-alt);
+  }
+
+  /* Links rápidos */
+  .not-found__links {
+    margin-top: var(--space-8);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--color-border);
+    width: 100%;
+    max-width: 32rem;
+  }
+
+  .not-found__links-title {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-4);
+  }
+
+  .not-found__links-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    justify-content: center;
+  }
+
+  .not-found__link {
+    font-size: var(--text-sm);
+    color: var(--color-primary);
+    font-weight: 500;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    transition: var(--transition);
+  }
+
+  .not-found__link:hover {
+    background-color: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+  }
+
+  @media (min-width: 768px) {
+    .not-found__title {
+      font-size: var(--text-4xl);
+    }
+
+    .not-found__code {
+      font-size: 10rem;
+    }
+  }
+</style>

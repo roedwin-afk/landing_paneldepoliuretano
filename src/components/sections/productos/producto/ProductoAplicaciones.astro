@@ -1,0 +1,109 @@
+---
+import Animate from "../../../ui/Animate.astro";
+import { CheckCircle } from "lucide-astro";
+
+interface Props {
+  applications: readonly string[];
+}
+
+const { applications } = Astro.props;
+---
+
+<section class="producto-aplicaciones">
+  <div class="container">
+    <Animate animation="fade-up">
+      <div class="producto-aplicaciones__header">
+        <h2 class="producto-aplicaciones__title">Aplicaciones</h2>
+        <p class="producto-aplicaciones__subtitle">
+          Sectores y proyectos donde este panel ofrece el mejor rendimiento.
+        </p>
+      </div>
+    </Animate>
+
+    <div class="producto-aplicaciones__grid">
+      {
+        applications.map((app, i) => (
+          <Animate animation="fade-up" delay={i * 80}>
+            <div class="aplicacion-card">
+              <div class="aplicacion-card__icon">
+                <CheckCircle size={24} />
+              </div>
+              <p class="aplicacion-card__text">{app}</p>
+            </div>
+          </Animate>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .producto-aplicaciones {
+    padding-block: var(--space-20);
+    background-color: var(--color-surface);
+  }
+
+  .producto-aplicaciones__header {
+    text-align: center;
+    margin-bottom: var(--space-12);
+  }
+
+  .producto-aplicaciones__title {
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    color: var(--color-dark);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+  }
+
+  .producto-aplicaciones__subtitle {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+  }
+
+  .producto-aplicaciones__grid {
+    display: grid;
+    gap: var(--space-4);
+    max-width: 100%;
+  }
+
+  /* Card */
+  .aplicacion-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4) var(--space-6);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+  }
+
+  .aplicacion-card:hover {
+    border-color: var(--color-primary);
+    background-color: #dbeafe;
+    transform: translateX(4px);
+  }
+
+  .aplicacion-card__icon {
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .aplicacion-card__text {
+    font-size: var(--text-base);
+    font-weight: 500;
+    color: var(--color-dark);
+  }
+
+  @media (min-width: 768px) {
+    .producto-aplicaciones__title {
+      font-size: var(--text-4xl);
+    }
+
+    .producto-aplicaciones__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

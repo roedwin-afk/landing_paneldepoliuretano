@@ -1,0 +1,172 @@
+---
+import NavLinks from "../ui/NavLinks.astro";
+import { Mail, MapPin } from "lucide-astro";
+import { texts } from "../../content/texts";
+
+const { footer } = texts;
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <!-- Columna 1: Marca -->
+    <div class="footer__brand">
+      <a href="/" class="footer__logo">
+        PANEL<span class="footer__logo--accent">DE</span>POLIURETANO<span
+          class="footer__logo--muted">.com</span
+        >
+      </a>
+      <p class="footer__description">{footer.description}</p>
+    </div>
+
+    <!-- Columna 2: Navegación -->
+    <div class="footer__nav">
+      <h4 class="footer__heading">Navegación</h4>
+      <NavLinks variant="footer" />
+    </div>
+
+    <!-- Columna 3: Dominios -->
+    <div class="footer__related">
+      <h4 class="footer__heading">{footer.relatedTitle}</h4>
+      <ul class="footer__list">
+        {
+          footer.related.map((item) => (
+            <li>
+              <a href={item.href} class="footer__link">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <!-- Columna 4: Contacto -->
+    <div class="footer__contact">
+      <h4 class="footer__heading">{footer.contactTitle}</h4>
+      <ul class="footer__list">
+        <li class="footer__contact-item">
+          <Mail size={14} />
+          <a href={"mailto:" + footer.email} class="footer__link">
+            {footer.email}
+          </a>
+        </li>
+        <li class="footer__contact-item">
+          <MapPin size={14} />
+          <span class="footer__link">{footer.support}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Copyright -->
+  <div class="footer__bottom">
+    <div class="container">
+      <p class="footer__copyright">{footer.copyright}</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: var(--color-dark);
+    color: var(--color-dark-muted);
+  }
+
+  .footer__inner {
+    display: grid;
+    gap: var(--space-10);
+    padding-block: var(--space-12);
+  }
+
+  /* Logo */
+  .footer__logo {
+    display: inline-block;
+    font-size: var(--text-xl);
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-4);
+  }
+
+  .footer__logo--accent {
+    color: var(--color-accent);
+  }
+
+  .footer__logo--muted {
+    color: var(--color-dark-muted);
+    font-weight: 400;
+  }
+
+  .footer__description {
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    max-width: 20rem;
+  }
+
+  /* Headings */
+  .footer__heading {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-4);
+  }
+
+  /* Lists */
+  .footer__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .footer__link {
+    font-size: var(--text-sm);
+    color: var(--color-dark-muted);
+    transition: var(--transition);
+  }
+
+  .footer__link:hover {
+    color: white;
+  }
+
+  /* Contact items */
+  .footer__contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+
+  .footer__contact-item svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--color-accent);
+  }
+
+  /* Bottom bar */
+  .footer__bottom {
+    border-top: 1px solid rgb(255 255 255 / 0.08);
+    padding-block: var(--space-6);
+  }
+
+  .footer__copyright {
+    font-size: var(--text-xs);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* Responsive */
+  @media (min-width: 640px) {
+    .footer__inner {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .footer__inner {
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+    }
+  }
+</style>

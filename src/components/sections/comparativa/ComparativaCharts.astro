@@ -1,0 +1,231 @@
+---
+import Animate from "../../ui/Animate.astro";
+import { texts } from "../../../content/texts";
+
+const { comparativa } = texts;
+const { charts } = comparativa;
+---
+
+<section class="comparativa-charts">
+  <div class="container">
+    <Animate animation="fade-up">
+      <div class="comparativa-charts__header">
+        <h2 class="comparativa-charts__title">{charts.title}</h2>
+        <p class="comparativa-charts__subtitle">{charts.subtitle}</p>
+      </div>
+    </Animate>
+
+    <div class="comparativa-charts__grid">
+      <!-- Gráfica de barras -->
+      <Animate animation="fade-right" delay={100}>
+        <div class="chart-card">
+          <h3 class="chart-card__title">{charts.bar.title}</h3>
+          <div class="chart-card__wrapper">
+            <canvas id="barChart"></canvas>
+          </div>
+        </div>
+      </Animate>
+
+      <!-- Gráfica de radar -->
+      <Animate animation="fade-left" delay={200}>
+        <div class="chart-card">
+          <h3 class="chart-card__title">{charts.radar.title}</h3>
+          <div class="chart-card__wrapper">
+            <canvas id="radarChart"></canvas>
+          </div>
+        </div>
+      </Animate>
+    </div>
+  </div>
+</section>
+
+<style>
+  .comparativa-charts {
+    padding-block: var(--space-20);
+    background-color: var(--color-surface);
+  }
+
+  .comparativa-charts__header {
+    text-align: center;
+    margin-bottom: var(--space-12);
+  }
+
+  .comparativa-charts__title {
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    color: var(--color-dark);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+  }
+
+  .comparativa-charts__subtitle {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+  }
+
+  .comparativa-charts__grid {
+    display: grid;
+    gap: var(--space-8);
+  }
+
+  .chart-card {
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    box-shadow: var(--shadow-md);
+  }
+
+  .chart-card__title {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .chart-card__wrapper {
+    position: relative;
+    height: 20rem;
+  }
+
+  @media (min-width: 1024px) {
+    .comparativa-charts__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .comparativa-charts__title {
+      font-size: var(--text-4xl);
+    }
+  }
+</style>
+
+<script
+  define:vars={{
+    barData: charts.bar,
+    radarData: charts.radar,
+  }}
+>
+  function loadChartJS() {
+    return new Promise((resolve) => {
+      if (window.Chart) {
+        resolve(window.Chart);
+        return;
+      }
+      const script = document.createElement("script");
+      script.src = "https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js";
+      script.onload = () => resolve(window.Chart);
+      document.head.appendChild(script);
+    });
+  }
+
+  async function initCharts() {
+    const barEl = document.getElementById("barChart");
+    const radarEl = document.getElementById("radarChart");
+    if (!barEl || !radarEl) return;
+
+    const Chart = await loadChartJS();
+
+    // Destruir instancias previas si existen (view transitions)
+    Chart.getChart("barChart")?.destroy();
+    Chart.getChart("radarChart")?.destroy();
+
+    // Gráfica de barras
+    new Chart(barEl, {
+      type: "bar",
+      data: {
+        labels: barData.labels,
+        datasets: barData.datasets.map((ds) => ({
+          label: ds.label,
+          data: ds.values,
+          backgroundColor: ds.color + "cc",
+          borderColor: ds.color,
+          borderWidth: 2,
+          borderRadius: 6,
+        })),
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: "top",
+            labels: {
+              font: { family: "Inter, sans-serif", size: 12 },
+              padding: 16,
+            },
+          },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => ` ${ctx.dataset.label}: ${ctx.parsed.y}%`,
+            },
+          },
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: { font: { family: "Inter, sans-serif", size: 11 } },
+          },
+          y: {
+            min: 0,
+            max: 100,
+            grid: { color: "#e2e8f0" },
+            ticks: {
+              font: { family: "Inter, sans-serif", size: 11 },
+              callback: (val) => val + "%",
+            },
+          },
+        },
+      },
+    });
+
+    // Gráfica de radar
+    new Chart(radarEl, {
+      type: "radar",
+      data: {
+        labels: radarData.labels,
+        datasets: radarData.datasets.map((ds) => ({
+          label: ds.label,
+          data: ds.values,
+          backgroundColor: ds.color + "33",
+          borderColor: ds.color,
+          borderWidth: 2,
+          pointBackgroundColor: ds.color,
+          pointRadius: 4,
+        })),
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: "top",
+            labels: {
+              font: { family: "Inter, sans-serif", size: 12 },
+              padding: 16,
+            },
+          },
+        },
+        scales: {
+          r: {
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 25,
+              font: { family: "Inter, sans-serif", size: 10 },
+              backdropColor: "transparent",
+            },
+            grid: { color: "#e2e8f0" },
+            pointLabels: {
+              font: { family: "Inter, sans-serif", size: 11 },
+              color: "#1e293b",
+            },
+          },
+        },
+      },
+    });
+  }
+
+  document.addEventListener("astro:page-load", initCharts);
+</script>

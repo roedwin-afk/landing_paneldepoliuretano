@@ -1,0 +1,119 @@
+---
+import Animate from "../../../ui/Animate.astro";
+
+interface Props {
+  specs: readonly {
+    label: string;
+    value: string;
+  }[];
+}
+
+const { specs } = Astro.props;
+---
+
+<section class="producto-specs">
+  <div class="container">
+    <Animate animation="fade-up">
+      <div class="producto-specs__header">
+        <h2 class="producto-specs__title">Especificaciones Técnicas</h2>
+        <p class="producto-specs__subtitle">
+          Datos técnicos según normativa europea EN 14509.
+        </p>
+      </div>
+    </Animate>
+
+    <Animate animation="fade-up" delay={150}>
+      <div class="producto-specs__table-wrapper">
+        <table class="producto-specs__table">
+          <tbody>
+            {
+              specs.map((spec, i) => (
+                <tr class={i % 2 === 0 ? "row--even" : ""}>
+                  <td class="producto-specs__label">{spec.label}</td>
+                  <td class="producto-specs__value">{spec.value}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </Animate>
+  </div>
+</section>
+
+<style>
+  .producto-specs {
+    padding-block: var(--space-20);
+    background-color: var(--color-bg);
+  }
+
+  .producto-specs__header {
+    text-align: center;
+    margin-bottom: var(--space-12);
+  }
+
+  .producto-specs__title {
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    color: var(--color-dark);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+  }
+
+  .producto-specs__subtitle {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+  }
+
+  .producto-specs__table-wrapper {
+    max-width: 100%;
+    margin-inline: auto;
+    background-color: var(--color-surface);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+  }
+
+  .producto-specs__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+  }
+
+  .producto-specs__table tr {
+    border-bottom: 1px solid var(--color-border);
+    transition: var(--transition);
+  }
+
+  .producto-specs__table tr:last-child {
+    border-bottom: none;
+  }
+
+  .producto-specs__table tr:hover td {
+    background-color: #dbeafe;
+  }
+
+  .row--even td {
+    background-color: var(--color-bg-alt);
+  }
+
+  .producto-specs__label {
+    padding: var(--space-4) var(--space-6);
+    font-weight: 600;
+    color: var(--color-dark);
+    width: 50%;
+    border-right: 1px solid var(--color-border);
+  }
+
+  .producto-specs__value {
+    padding: var(--space-4) var(--space-6);
+    color: var(--color-text);
+  }
+
+  @media (min-width: 768px) {
+    .producto-specs__title {
+      font-size: var(--text-4xl);
+    }
+  }
+</style>

@@ -1,0 +1,34 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/layout/Navbar.astro";
+import Footer from "../../components/layout/Footer.astro";
+import CTASection from "../../components/sections/CTASection.astro";
+import ProductoHero from "../../components/sections/productos/producto/ProductoHero.astro";
+import ProductoSpecs from "../../components/sections/productos/producto/ProductoSpecs.astro";
+import ProductoAplicaciones from "../../components/sections/productos/producto/ProductoAplicaciones.astro";
+import { texts } from "../../content/texts";
+
+const producto = texts.productos.items[1];
+---
+
+<Layout
+  title={`${producto.title} | paneldepoliuretano.com`}
+  description={producto.shortDescription}
+>
+  <Navbar />
+  <main>
+    <ProductoHero
+      title={producto.title}
+      description={producto.description}
+      image={producto.image}
+      imageAlt={producto.imageAlt}
+      tag={producto.tag}
+      tagColor={producto.tagColor}
+      highlights={producto.highlights}
+    />
+    <ProductoSpecs specs={producto.specs} />
+    <ProductoAplicaciones applications={producto.applications} />
+    <CTASection />
+  </main>
+  <Footer />
+</Layout>

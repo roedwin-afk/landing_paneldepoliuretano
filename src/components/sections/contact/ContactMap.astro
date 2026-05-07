@@ -33,60 +33,58 @@ const { map } = texts.contact;
 </style>
 
 <script
-    define:vars={{
-        lat: map.lat,
-        lng: map.lng,
-        zoom: map.zoom,
-        markerColor: map.markerColor,
-    }}
+  define:vars={{
+    lat: map.lat,
+    lng: map.lng,
+    zoom: map.zoom,
+    markerColor: map.markerColor,
+  }}
 >
-    function loadLeaflet() {
-        return new Promise((resolve) => {
-            if (window.L) {
-                resolve(window.L);
-                return;
-            }
+  function loadLeaflet() {
+    return new Promise((resolve) => {
+      if (window.L) {
+        resolve(window.L);
+        return;
+      }
 
-            // CSS
-            const link = document.createElement("link");
-            link.rel = "stylesheet";
-            link.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
-            document.head.appendChild(link);
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+      document.head.appendChild(link);
 
-            // JS
-            const script = document.createElement("script");
-            script.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
-            script.onload = () => resolve(window.L);
-            document.head.appendChild(script);
-        });
-    }
+      const script = document.createElement("script");
+      script.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+      script.onload = () => resolve(window.L);
+      document.head.appendChild(script);
+    });
+  }
 
-    async function initMap() {
-        const mapEl = document.getElementById("map");
-        if (!mapEl) return;
-        if (mapEl._leaflet_id) return;
+  async function initMap() {
+    const mapEl = document.getElementById("map");
+    if (!mapEl) return;
+    if (mapEl._leaflet_id) return;
 
-        const L = await loadLeaflet();
+    const L = await loadLeaflet();
 
-        const leafletMap = L.map("map", {
-            center: [lat, lng],
-            zoom: zoom,
-            scrollWheelZoom: false,
-            zoomControl: true,
-        });
+    const leafletMap = L.map("map", {
+      center: [lat, lng],
+      zoom: zoom,
+      scrollWheelZoom: false,
+      zoomControl: true,
+    });
 
-        L.tileLayer(
-            "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-            {
-                attribution:
-                    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-                maxZoom: 19,
-            },
-        ).addTo(leafletMap);
+    L.tileLayer(
+      "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+      {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        maxZoom: 19,
+      }
+    ).addTo(leafletMap);
 
-        const icon = L.divIcon({
-            className: "",
-            html: `<div style="
+    const icon = L.divIcon({
+      className: "",
+      html: `<div style="
         width: 2rem;
         height: 2rem;
         background-color: ${markerColor};
@@ -95,15 +93,15 @@ const { map } = texts.contact;
         transform: rotate(-45deg);
         box-shadow: 0 2px 8px rgb(0 0 0 / 0.3);
       "></div>`,
-            iconSize: [32, 32],
-            iconAnchor: [16, 32],
-            popupAnchor: [0, -36],
-        });
+      iconSize: [32, 32],
+      iconAnchor: [16, 32],
+      popupAnchor: [0, -36],
+    });
 
-        L.marker([lat, lng], { icon })
-            .addTo(leafletMap)
-            .bindPopup(
-                `<div style="font-family: Inter, sans-serif; padding: 0.25rem;">
+    L.marker([lat, lng], { icon })
+      .addTo(leafletMap)
+      .bindPopup(
+        `<div style="font-family: Inter, sans-serif; padding: 0.25rem;">
           <strong style="color: #1e3a8a; display: block; margin-bottom: 0.25rem;">
             paneldepoliuretano.com
           </strong>
@@ -111,10 +109,15 @@ const { map } = texts.contact;
             Av. Presidente Masaryk No. 61, Int. 901<br/>
             Polanco V Sección, CDMX
           </span>
-        </div>`,
-            )
-            .openPopup();
-    }
+        </div>`
+      )
+      .openPopup();
 
-    document.addEventListener("astro:page-load", initMap);
+    // Fix crítico: forzar recalculo de tamaño después de que el DOM esté listo
+    setTimeout(() => {
+      leafletMap.invalidateSize();
+    }, 100);
+  }
+
+  document.addEventListener("astro:page-load", initMap);
 </script>
