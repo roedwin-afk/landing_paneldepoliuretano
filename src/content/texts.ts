@@ -121,11 +121,6 @@ export const texts = {
         email: "ingenieria@paneldepoliuretano.com",
         support: "Soporte Técnico Central",
         copyright: "© 2024 paneldepoliuretano.com - Todos los derechos reservados.",
-        related: [
-            { label: "purandpirinsulation.com", href: "#" },
-            { label: "rockwoolpanelsandwich.com", href: "#" },
-            { label: "compositesanwichpanels.com", href: "#" },
-        ],
     },
     contact: {
         title: "Consulta para Proyectos",

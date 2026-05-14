@@ -24,22 +24,6 @@ const { footer } = texts;
       <NavLinks variant="footer" />
     </div>
 
-    <!-- Columna 3: Dominios -->
-    <div class="footer__related">
-      <h4 class="footer__heading">{footer.relatedTitle}</h4>
-      <ul class="footer__list">
-        {
-          footer.related.map((item) => (
-            <li>
-              <a href={item.href} class="footer__link">
-                {item.label}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-
     <!-- Columna 4: Contacto -->
     <div class="footer__contact">
       <h4 class="footer__heading">{footer.contactTitle}</h4>
@@ -74,7 +58,7 @@ const { footer } = texts;
 
   .footer__inner {
     display: grid;
-    gap: var(--space-10);
+    gap: var(--space-1);
     padding-block: var(--space-12);
   }
 
