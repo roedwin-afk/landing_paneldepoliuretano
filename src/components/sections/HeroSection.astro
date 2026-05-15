@@ -1,9 +1,14 @@
 ---
 import Animate from "../ui/Animate.astro";
+import { Image } from "astro:assets";
 import { Table, FileText } from "lucide-astro";
 import { texts } from "../../content/texts";
 
+import panel from "../../assets/images/panel.webp";
+
 const { hero } = texts;
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <section class="hero">
@@ -15,7 +20,7 @@ const { hero } = texts;
         <h1 class="hero__title">{hero.title}</h1>
         <p class="hero__description">{hero.description}</p>
         <div class="hero__actions">
-          <a href="/#comparativa" class="hero__btn hero__btn--primary">
+          <a href=`${base}comparativa` class="hero__btn hero__btn--primary">
             <Table size={18} />
             {hero.ctaPrimary}
           </a>
@@ -31,11 +36,21 @@ const { hero } = texts;
     <Animate animation="fade-left" duration={700} delay={150}>
       <div class="hero__media">
         <div class="hero__image-wrapper">
-          <img
+          <!-- <img
             src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop"
             alt="Instalación de paneles industriales"
             class="hero__image"
             loading="eager"
+          /> -->
+          <Image
+            src={panel}
+            alt="Paneles PUR -Poliuretano"
+            width={600}
+            height={480}
+            format="webp"
+            class="hero__image"
+            loading="eager"
+            class="product-hero__img"
           />
         </div>
         <div class="hero__stat">

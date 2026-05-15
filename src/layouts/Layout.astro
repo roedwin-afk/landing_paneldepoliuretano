@@ -1,6 +1,8 @@
 ---
 import { ClientRouter } from "astro:transitions";
 import { texts } from "../content/texts";
+import Navbar from "../components/layout/Navbar.astro";
+import Footer from "../components/layout/Footer.astro";
 
 interface Props {
   title?: string;
@@ -54,7 +56,9 @@ const canonicalURL = Astro.url.href;
   </head>
 
   <body>
+    <Navbar />
     <slot />
+    <Footer />
   </body>
 </html>
 
