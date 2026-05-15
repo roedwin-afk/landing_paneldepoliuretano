@@ -2,8 +2,8 @@ import { defineBlogConfig } from 'astro-blog-kit';
 
 export default defineBlogConfig({
   wpUrl: 'http://paneldetecho.local/',
-  postsPerPage: 5,
-  defaultLayout: 'magazine',
+  postsPerPage: 4,
+  defaultLayout: 'grid',
   locale: 'es',
   theme: {
     accent: '#facc15',
