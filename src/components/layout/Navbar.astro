@@ -2,6 +2,9 @@
 import NavLinks from "../ui/NavLinks.astro";
 import MobileMenu from "./MobileMenu.astro";
 import { texts } from "../../content/texts";
+import { Image } from "astro:assets";
+
+import logo from "../../assets/logo.svg";
 
 const base = import.meta.env.BASE_URL;
 ---
@@ -10,9 +13,19 @@ const base = import.meta.env.BASE_URL;
   <div class="container navbar__inner">
     <!-- Logo -->
     <a href={base} class="navbar__logo">
-      PANEL<span class="navbar__logo--accent">DE</span>POLIURETANO<span
+      <!-- PANEL<span class="navbar__logo--accent">DE</span>POLIURETANO<span
         class="navbar__logo--muted">.com</span
-      >
+      > -->
+      <Image
+        src={logo}
+        alt="Panel sándwich para techo industrial"
+        width={200}
+        height={50}
+        class="navbar__logo-img"
+        format="webp"
+        quality={85}
+        loading="eager"
+      />
     </a>
 
     <!-- Desktop nav -->

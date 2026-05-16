@@ -2,6 +2,10 @@
 import Animate from "../ui/Animate.astro";
 import { ArrowRight } from "lucide-astro";
 import { texts } from "../../content/texts";
+import { Image } from "astro:assets";
+
+import panelSandwich from "../../assets/images/panel-sandwich-cubierta.png";
+import panelFrigorifico from "../../assets/images/panel-frigorifico.png";
 
 const { products } = texts;
 
@@ -9,6 +13,12 @@ const tagColors: Record<string, string> = {
   default: "tag--default",
   blue: "tag--blue",
   orange: "tag--orange",
+};
+
+const images = {
+  "Panel Sandwich Cubierta": panelSandwich,
+  "Panel Frigorífico PUR/PIR": panelFrigorifico,
+  "Panel Lana de Roca": panelSandwich,
 };
 ---
 
@@ -20,24 +30,30 @@ const tagColors: Record<string, string> = {
           <h2 class="products__title">{products.title}</h2>
           <p class="products__subtitle">{products.subtitle}</p>
         </div>
-        <button class="products__cta-thickness">
+        <!-- <button class="products__cta-thickness">
           {products.ctaThickness}
-        </button>
+        </button> -->
       </div>
     </Animate>
 
     <div class="products__grid">
       {
         products.items.map((item, i) => (
+          
           <Animate animation="fade-up" delay={i * 100}>
             <article class="product-card">
               <div class="product-card__image-wrapper">
-                <img
+                {/* <img
                   src={item.image}
                   alt={item.imageAlt}
                   class="product-card__image"
                   loading="lazy"
-                />
+                /> */}
+                <Image
+                  src={images[item.title]}
+                  alt={item.imageAlt}
+                  class="product-card__image"
+                  loading="lazy" />
                 <span class={`product-card__tag ${tagColors[item.tagColor]}`}>
                   {item.tag}
                 </span>

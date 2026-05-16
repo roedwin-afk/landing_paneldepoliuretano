@@ -120,7 +120,7 @@ export const texts = {
         contactTitle: "Contacto",
         email: "ingenieria@paneldepoliuretano.com",
         support: "Soporte Técnico Central",
-        copyright: "© 2024 paneldepoliuretano.com - Todos los derechos reservados.",
+        copyright: `© ${new Date().getFullYear()} paneldepoliuretano.com - Todos los derechos reservados.`,
     },
     contact: {
         title: "Consulta para Proyectos",

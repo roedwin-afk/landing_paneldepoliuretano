@@ -15,6 +15,8 @@ const {
 } = Astro.props;
 
 const canonicalURL = Astro.url.href;
+
+
 ---
 
 <!doctype html>
@@ -42,7 +44,7 @@ const canonicalURL = Astro.url.href;
     <meta name="twitter:description" content={description} />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href=`${canonicalURL}favicon.svg` />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

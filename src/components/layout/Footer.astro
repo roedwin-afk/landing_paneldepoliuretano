@@ -2,6 +2,9 @@
 import NavLinks from "../ui/NavLinks.astro";
 import { Mail, MapPin } from "lucide-astro";
 import { texts } from "../../content/texts";
+import { Image } from "astro:assets";
+
+import logo from "../../assets/logo.svg";
 
 const { footer } = texts;
 ---
@@ -11,9 +14,19 @@ const { footer } = texts;
     <!-- Columna 1: Marca -->
     <div class="footer__brand">
       <a href="/" class="footer__logo">
-        PANEL<span class="footer__logo--accent">DE</span>POLIURETANO<span
+        <!-- PANEL<span class="footer__logo--accent">DE</span>POLIURETANO<span
           class="footer__logo--muted">.com</span
-        >
+        > -->
+        <Image
+          src={logo}
+          alt="Panel sándwich para techo industrial"
+          width={200}
+          height={50}
+          class="footer__logo-img"
+          format="webp"
+          quality={85}
+          loading="eager"
+        />
       </a>
       <p class="footer__description">{footer.description}</p>
     </div>
@@ -45,10 +58,18 @@ const { footer } = texts;
   <!-- Copyright -->
   <div class="footer__bottom">
     <div class="container">
-      <p class="footer__copyright">{footer.copyright}</p>
+      <p class="footer__copyright" id="footer-copyright">
+        © <span id="copyright-year"></span> paneldepoliuretano.com - Todos los derechos
+        reservados.
+      </p>
     </div>
   </div>
 </footer>
+
+<script>
+  document.getElementById("copyright-year")!.textContent = 
+    new Date().getFullYear().toString();
+</script>
 
 <style>
   .footer {
@@ -58,27 +79,26 @@ const { footer } = texts;
 
   .footer__inner {
     display: grid;
-    gap: var(--space-1);
+    gap: var(--space-10);
     padding-block: var(--space-12);
   }
 
   /* Logo */
   .footer__logo {
     display: inline-block;
-    font-size: var(--text-xl);
-    font-weight: 800;
-    color: white;
-    letter-spacing: -0.02em;
     margin-bottom: var(--space-4);
+    transition: var(--transition);
   }
 
-  .footer__logo--accent {
-    color: var(--color-accent);
+  .footer__logo:hover {
+    opacity: 0.8;
   }
 
-  .footer__logo--muted {
-    color: var(--color-dark-muted);
-    font-weight: 400;
+  .footer__logo-img {
+    display: block;
+    height: 2.5rem;
+    width: auto;
+    filter: brightness(0) invert(1);
   }
 
   .footer__description {
@@ -102,7 +122,7 @@ const { footer } = texts;
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: var(--space-2);
+    gap: var(--space-3);
   }
 
   .footer__link {
@@ -146,11 +166,19 @@ const { footer } = texts;
     .footer__inner {
       grid-template-columns: 1fr 1fr;
     }
+
+    .footer__brand {
+      grid-column: 1 / -1;
+    }
   }
 
   @media (min-width: 1024px) {
     .footer__inner {
-      grid-template-columns: 2fr 1fr 1fr 1fr;
+      grid-template-columns: 2fr 1fr 1fr;
+    }
+
+    .footer__brand {
+      grid-column: auto;
     }
   }
 </style>
