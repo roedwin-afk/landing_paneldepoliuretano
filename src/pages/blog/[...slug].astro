@@ -5,9 +5,13 @@ import config from "../../../blog.config";
 import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
-  const wp = createWPClient(config.wpUrl);
-  const posts = await wp.getAllPosts();
-  return getStaticPathsForPosts(posts);
+  try {
+    const wp = createWPClient(config.wpUrl);
+    const posts = await wp.getAllPosts();
+    return getStaticPathsForPosts(posts);
+  } catch {
+  console.warn("WP no disponible en build");
+}
 }
 
 const { post } = Astro.props;

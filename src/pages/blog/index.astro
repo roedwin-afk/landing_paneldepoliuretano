@@ -4,8 +4,17 @@ import { createWPClient } from "astro-blog-kit/utils";
 import config from "../../../blog.config";
 import Layout from "../../layouts/Layout.astro";
 
-const wp = createWPClient(config.wpUrl);
-const { posts, totalPages } = await wp.getPosts({ perPage: config.postsPerPage ?? 5 });
+let posts: any[] = [];
+let totalPages = 0;
+
+try {
+  const wp = createWPClient(config.wpUrl);
+  const result = await wp.getPosts({ perPage: config.postsPerPage ?? 5 });
+  posts = result.posts;
+  totalPages = result.totalPages;
+} catch {
+  console.warn("WP no disponible en build");
+}
 
 const t = {
   blog: {
