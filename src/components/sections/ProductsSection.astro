@@ -6,8 +6,9 @@ import { Image } from "astro:assets";
 
 import panelSandwich from "../../assets/images/panel-sandwich-cubierta.png";
 import panelFrigorifico from "../../assets/images/panel-frigorifico.png";
+import panelLanaDeRoca from "../../assets/images/panel-lana-de-roca.png";
 
-const { products } = texts;
+const { products, productos } = texts;
 
 const tagColors: Record<string, string> = {
   default: "tag--default",
@@ -18,8 +19,10 @@ const tagColors: Record<string, string> = {
 const images = {
   "Panel Sandwich Cubierta": panelSandwich,
   "Panel Frigorífico PUR/PIR": panelFrigorifico,
-  "Panel Lana de Roca": panelSandwich,
+  "Panel Lana de Roca": panelLanaDeRoca,
 };
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <section id="productos" class="products">
@@ -38,8 +41,7 @@ const images = {
 
     <div class="products__grid">
       {
-        products.items.map((item, i) => (
-          
+        productos.items.map((item, i) => (
           <Animate animation="fade-up" delay={i * 100}>
             <article class="product-card">
               <div class="product-card__image-wrapper">
@@ -53,17 +55,28 @@ const images = {
                   src={images[item.title]}
                   alt={item.imageAlt}
                   class="product-card__image"
-                  loading="lazy" />
+                  loading="lazy"
+                />
                 <span class={`product-card__tag ${tagColors[item.tagColor]}`}>
                   {item.tag}
                 </span>
               </div>
               <div class="product-card__body">
                 <h3 class="product-card__title">{item.title}</h3>
-                <p class="product-card__description">{item.description}</p>
+                <p class="product-card__description">{item.shortDescription}</p>
                 <div class="product-card__footer">
-                  <span class="product-card__spec">{item.spec}</span>
-                  <ArrowRight size={18} />
+                  {/* <a
+                    href={`${base}productos/${item.slug}`}
+                    class="producto-card"
+                  >
+                  </a> */}
+                  <span class="product-card__spec">Ver detalles</span> 
+                  <a
+                    href={`${base}productos/${item.slug}`}
+                    class="producto-card"
+                  >
+                    <ArrowRight size={18} />{" "}
+                  </a>
                 </div>
               </div>
             </article>

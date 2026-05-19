@@ -2,6 +2,13 @@
 import Animate from "../../ui/Animate.astro";
 import { ArrowRight } from "lucide-astro";
 import { texts } from "../../../content/texts";
+import { Image } from "astro:assets";
+
+
+import panelSandwich from "../../../assets/images/panel-sandwich-cubierta.png";
+import panelFrigorifico from "../../../assets/images/panel-frigorifico.png";
+import panelLanaDeRoca from "../../../assets/images/panel-lana-de-roca.png";
+
 
 const { productos } = texts;
 
@@ -9,6 +16,12 @@ const tagColors: Record<string, string> = {
     default: "tag--default",
     blue: "tag--blue",
     orange: "tag--orange",
+};
+
+const images = {
+    "Panel Sandwich Cubierta": panelSandwich,
+    "Panel Frigorífico PUR/PIR": panelFrigorifico,
+    "Panel Lana de Roca": panelLanaDeRoca,
 };
 
 const base = import.meta.env.BASE_URL;
@@ -25,8 +38,8 @@ const base = import.meta.env.BASE_URL;
                             class="producto-card"
                         >
                             <div class="producto-card__image-wrapper">
-                                <img
-                                    src={item.image}
+                                <Image
+                                    src={images[item.title]}
                                     alt={item.imageAlt}
                                     class="producto-card__image"
                                     loading="lazy"
