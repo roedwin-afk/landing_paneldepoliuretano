@@ -191,7 +191,7 @@ export const texts = {
           label: "Rango de Temperatura",
           pur: "-40°C a +80°C",
           pir: "-40°C a +100°C",
-          rock: "Hasta 1000°C",
+          rock: "-15°C a +80°C",
         },
         {
           label: "Aislamiento Acústico (Rw)",
@@ -201,9 +201,9 @@ export const texts = {
         },
         {
           label: "Densidad",
-          pur: "40 kg/m³",
-          pir: "40 kg/m³",
-          rock: "100-150 kg/m³",
+          pur: "40 kg/m³ ±3",
+          pir: "40 kg/m³ ±3",
+          rock: "45-150 kg/m³",
         },
         {
           label: "Resistencia a la Humedad",
@@ -221,7 +221,7 @@ export const texts = {
           label: "Espesores disponibles",
           pur: "30 — 200 mm",
           pir: "30 — 200 mm",
-          rock: "40 — 200 mm",
+          rock: "40 — 100 mm",
         },
         {
           label: "Certificación",
@@ -231,9 +231,9 @@ export const texts = {
         },
         {
           label: "Uso Recomendado",
-          pur: "Cámaras frigoríficas",
-          pir: "Naves industriales",
-          rock: "Sectorización cortafuego",
+          pur: "Cámaras frigoríficas — Naves industriales",
+          pir: "Cámaras frigoríficas — Naves industriales",
+          rock: "Aislamiento Termoacústico — Sectorización cortafuego",
         },
       ],
     },
@@ -458,7 +458,7 @@ export const texts = {
         shortDescription:
           "Juntas estancas de alta precisión para conservación y congelación de alimentos.",
         description:
-          "El panel frigorífico es el sistema de cerramiento de referencia para instalaciones de frío industrial. Su núcleo de poliuretano inyectado de alta densidad y sus juntas machihembradas de precisión garantizan la estanqueidad total necesaria para mantener temperaturas desde -40°C hasta +12°C con el mínimo consumo energético.",
+          "El panel frigorífico es el sistema de cerramiento de referencia para instalaciones de frío industrial. Su núcleo de poliuretano o polisocianurato inyectado de alta densidad y sus juntas machihembradas de precisión garantizan la estanqueidad total necesaria para mantener temperaturas desde -40°C hasta +12°C con el mínimo consumo energético.",
         image:
           "https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop",
         imageAlt: "Panel frigorífico para cámara industrial",
@@ -511,7 +511,7 @@ export const texts = {
         imageAlt: "Panel de lana de roca para sectorización",
         specs: [
           { label: "Material del núcleo", value: "Lana de Roca mineral" },
-          { label: "Espesores disponibles", value: "40 — 200 mm" },
+          { label: "Espesores disponibles", value: "40 — 100 mm" },
           { label: "Ancho útil", value: "1000 mm" },
           { label: "Clasificación al fuego", value: "A1 / A2-s1, d0" },
           { label: "Resistencia al fuego", value: "EI30 a EI240" },
