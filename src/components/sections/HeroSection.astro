@@ -24,7 +24,11 @@ const base = import.meta.env.BASE_URL;
             <Table size={18} />
             {hero.ctaPrimary}
           </a>
-          <a href="/public/files/P5G-PUR-V2.pdf" download class="hero__btn hero__btn--secondary">
+          <a
+            href="/files/P5G-PUR-V2.pdf"
+            download
+            class="hero__btn hero__btn--secondary"
+          >
             <FileText size={18} />
             {hero.ctaSecondary}
           </a>
@@ -122,6 +126,8 @@ const base = import.meta.env.BASE_URL;
     padding: var(--space-3) var(--space-6);
     border-radius: var(--radius-md);
     transition: var(--transition);
+    width: 100%;
+    justify-content: center;
   }
 
   .hero__btn--primary {
@@ -158,7 +164,9 @@ const base = import.meta.env.BASE_URL;
   .hero__image {
     width: 100%;
     height: auto;
+    aspect-ratio: 10 / 9;
     object-fit: cover;
+    display: block;
   }
 
   .hero__stat {
@@ -203,6 +211,10 @@ const base = import.meta.env.BASE_URL;
 
     .hero__stat {
       display: block;
+    }
+    .hero__btn {
+      width: auto;
+      justify-content: flex-start;
     }
   }
 </style>

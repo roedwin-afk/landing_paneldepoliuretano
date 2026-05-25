@@ -1,26 +1,36 @@
 ---
-import { texts } from "../../content/texts";
-
 interface Props {
-  variant?: "navbar" | "footer" | "mobile";
+  variant: "navbar" | "footer" | "mobile";
 }
 
-const { variant = "navbar" } = Astro.props;
-
+const { variant } = Astro.props;
+const { texts } = await import("../../content/texts");
 const base = import.meta.env.BASE_URL;
 
+// Pathname actual normalizado
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+
 const links = [
-  { href: `${base}comparativa`, label: texts.nav.comparative },
-  { href: `${base}productos`, label: texts.nav.products },
-  { href: `${base}blog`, label: texts.nav.blog },
+  { label: texts.nav.comparative, href: `${base}comparativa` },
+  { label: texts.nav.products,    href: `${base}productos` },
+  { label: texts.nav.blog,        href: `${base}blog` },
 ];
+
+function isActive(href: string) {
+  const normalized = href.replace(/\/$/, "") || "/";
+  return currentPath === normalized || currentPath.startsWith(normalized + "/");
+}
 ---
 
-<ul class={`nav-links nav-links--${variant}`} role="list">
+<ul class={`nav-links nav-links--${variant}`}>
   {
     links.map((link) => (
       <li>
-        <a href={link.href} class="nav-link">
+        
+        <a  href={link.href}
+          class={`nav-link ${isActive(link.href) ? "nav-link--active" : ""}`}
+          aria-current={isActive(link.href) ? "page" : undefined}
+        >
           {link.label}
         </a>
       </li>
@@ -33,7 +43,7 @@ const links = [
     list-style: none;
   }
 
-  /* Navbar */
+  /* ── Navbar ── */
   .nav-links--navbar {
     display: flex;
     align-items: center;
@@ -41,19 +51,49 @@ const links = [
   }
 
   .nav-links--navbar .nav-link {
+    position: relative;
     font-size: var(--text-sm);
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--color-text);
     transition: var(--transition);
+    padding-bottom: 2px;
   }
 
   .nav-links--navbar .nav-link:hover {
     color: var(--color-accent);
   }
 
-  /* Footer */
+  /* Línea activa animada debajo */
+  .nav-links--navbar .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-accent);
+    border-radius: 2px;
+    transition: width 0.25s ease;
+  }
+
+  .nav-links--navbar .nav-link:hover::after {
+    width: 100%;
+  }
+
+  /* Estado activo: línea completa + color accent */
+  .nav-links--navbar .nav-link--active {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .nav-links--navbar .nav-link--active::after {
+    width: 100%;
+    background-color: var(--color-primary);
+  }
+
+  /* ── Footer ── */
   .nav-links--footer {
     display: flex;
     flex-direction: column;
@@ -66,11 +106,12 @@ const links = [
     transition: var(--transition);
   }
 
-  .nav-links--footer .nav-link:hover {
+  .nav-links--footer .nav-link:hover,
+  .nav-links--footer .nav-link--active {
     color: white;
   }
 
-  /* Mobile */
+  /* ── Mobile ── */
   .nav-links--mobile {
     display: flex;
     flex-direction: column;
@@ -90,5 +131,13 @@ const links = [
   .nav-links--mobile .nav-link:hover {
     color: var(--color-accent);
     padding-left: var(--space-2);
+  }
+
+  /* Estado activo mobile: fondo sutil + color primary */
+  .nav-links--mobile .nav-link--active {
+    color: var(--color-primary);
+    font-weight: 700;
+    padding-left: var(--space-2);
+    border-bottom-color: var(--color-primary);
   }
 </style>

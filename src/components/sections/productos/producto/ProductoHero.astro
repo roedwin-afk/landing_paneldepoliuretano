@@ -1,8 +1,15 @@
 ---
 import Animate from "../../../ui/Animate.astro";
+import { Image } from "astro:assets";
+
+import panelSandwich from "../../../../assets/images/panel-sandwich-cubierta.png";
+import panelFrigorifico from "../../../../assets/images/panel-frigorifico.png";
+import panelLanaDeRoca from "../../../../assets/images/panel-lana-de-roca.png";
+
+type ProductTitle = "Panel Sandwich Cubierta" | "Panel Frigorífico PUR/PIR" | "Panel Lana de Roca";
 
 interface Props {
-  title: string;
+  title: ProductTitle;
   description: string;
   image: string;
   imageAlt: string;
@@ -23,6 +30,14 @@ const tagColors: Record<string, string> = {
   blue: "tag--blue",
   orange: "tag--orange",
 };
+
+const images = {
+  "Panel Sandwich Cubierta": panelSandwich,
+  "Panel Frigorífico PUR/PIR": panelFrigorifico,
+  "Panel Lana de Roca": panelLanaDeRoca,
+};
+
+console.log(title);
 ---
 
 <section class="producto-hero">
@@ -52,8 +67,8 @@ const tagColors: Record<string, string> = {
     <Animate animation="fade-left" delay={150}>
       <div class="producto-hero__media">
         <div class="producto-hero__image-wrapper">
-          <img
-            src={image}
+          <Image
+            src={images[title]}
             alt={imageAlt}
             class="producto-hero__image"
             loading="eager"

@@ -1,6 +1,10 @@
 ---
 import NavLinks from "../ui/NavLinks.astro";
 import { texts } from "../../content/texts";
+import { Image } from "astro:assets";
+import logo from "../../assets/logo.svg";
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
@@ -9,8 +13,17 @@ import { texts } from "../../content/texts";
   <nav class="mobile-menu__panel" aria-label="Navegación móvil">
     <!-- Header del panel -->
     <div class="mobile-menu__header">
-      <a href="/" class="mobile-menu__logo">
-        PANEL<span class="mobile-menu__logo--accent">DE</span>POLIURETANO
+      <a href={base} class="mobile-menu__logo-link">
+        <Image
+          src={logo}
+          alt="Panel de Poliuretano"
+          width={200}
+          height={50}
+          class="mobile-menu__logo-img"
+          format="webp"
+          quality={85}
+          loading="eager"
+        />
       </a>
       <button
         class="mobile-menu__close"
@@ -87,15 +100,19 @@ import { texts } from "../../content/texts";
     justify-content: space-between;
   }
 
-  .mobile-menu__logo {
-    font-size: var(--text-base);
-    font-weight: 800;
-    color: var(--color-primary);
-    letter-spacing: -0.02em;
+  .mobile-menu__logo-link {
+    display: inline-block;
+    transition: var(--transition);
   }
 
-  .mobile-menu__logo--accent {
-    color: var(--color-accent);
+  .mobile-menu__logo-link:hover {
+    opacity: 0.8;
+  }
+
+  .mobile-menu__logo-img {
+    display: block;
+    height: 2.5rem;
+    width: auto;
   }
 
   .mobile-menu__close {

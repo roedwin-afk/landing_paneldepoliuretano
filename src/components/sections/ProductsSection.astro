@@ -44,41 +44,29 @@ const base = import.meta.env.BASE_URL;
         productos.items.map((item, i) => (
           <Animate animation="fade-up" delay={i * 100}>
             <article class="product-card">
-              <div class="product-card__image-wrapper">
-                {/* <img
-                  src={item.image}
-                  alt={item.imageAlt}
-                  class="product-card__image"
-                  loading="lazy"
-                /> */}
-                <Image
-                  src={images[item.title]}
-                  alt={item.imageAlt}
-                  class="product-card__image"
-                  loading="lazy"
-                />
-                <span class={`product-card__tag ${tagColors[item.tagColor]}`}>
-                  {item.tag}
-                </span>
-              </div>
-              <div class="product-card__body">
-                <h3 class="product-card__title">{item.title}</h3>
-                <p class="product-card__description">{item.shortDescription}</p>
-                <div class="product-card__footer">
-                  {/* <a
-                    href={`${base}productos/${item.slug}`}
-                    class="producto-card"
-                  >
-                  </a> */}
-                  <span class="product-card__spec">Ver detalles</span> 
-                  <a
-                    href={`${base}productos/${item.slug}`}
-                    class="producto-card"
-                  >
-                    <ArrowRight size={18} />{" "}
-                  </a>
+              <a href={`${base}productos/${item.slug}`} class="producto-card">
+                <div class="product-card__image-wrapper">
+                  <Image
+                    src={images[item.title]}
+                    alt={item.imageAlt}
+                    class="product-card__image"
+                    loading="lazy"
+                  />
+                  <span class={`product-card__tag ${tagColors[item.tagColor]}`}>
+                    {item.tag}
+                  </span>
                 </div>
-              </div>
+                <div class="product-card__body">
+                  <h3 class="product-card__title">{item.title}</h3>
+                  <p class="product-card__description">
+                    {item.shortDescription}
+                  </p>
+                  <div class="product-card__footer">
+                    <span class="product-card__spec">Ver detalles</span>
+                    <ArrowRight size={18} />{" "}
+                  </div>
+                </div>
+              </a>
             </article>
           </Animate>
         ))
@@ -90,7 +78,7 @@ const base = import.meta.env.BASE_URL;
 <style>
   .products {
     padding-block: var(--space-20);
-    background-color: var(--color-surface);
+    background-color: var(--color-surface); 
   }
 
   .products__header {
@@ -99,7 +87,7 @@ const base = import.meta.env.BASE_URL;
     gap: var(--space-4);
     margin-bottom: var(--space-10);
   }
-
+  
   .products__title {
     font-size: var(--text-3xl);
     font-weight: 800;
@@ -107,12 +95,12 @@ const base = import.meta.env.BASE_URL;
     letter-spacing: -0.02em;
     margin-bottom: var(--space-2);
   }
-
+  
   .products__subtitle {
     font-size: var(--text-base);
     color: var(--color-text-muted);
   }
-
+  
   .products__cta-thickness {
     align-self: flex-start;
     font-size: var(--text-sm);
@@ -122,18 +110,18 @@ const base = import.meta.env.BASE_URL;
     padding-bottom: 2px;
     transition: var(--transition);
   }
-
+  
   .products__cta-thickness:hover {
     color: var(--color-accent);
     border-color: var(--color-accent);
   }
-
+  
   /* Grid */
   .products__grid {
     display: grid;
     gap: var(--space-8);
   }
-
+  
   /* Card */
   .product-card {
     background-color: var(--color-surface);
@@ -143,29 +131,29 @@ const base = import.meta.env.BASE_URL;
     box-shadow: var(--shadow-md);
     transition: var(--transition);
   }
-
+  
   .product-card:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-xl);
   }
-
+  
   .product-card__image-wrapper {
     position: relative;
     height: 12rem;
     overflow: hidden;
   }
-
+  
   .product-card__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
   }
-
+  
   .product-card:hover .product-card__image {
     transform: scale(1.05);
   }
-
+  
   /* Tags */
   .product-card__tag {
     position: absolute;
@@ -177,7 +165,7 @@ const base = import.meta.env.BASE_URL;
     border-radius: var(--radius-sm);
     letter-spacing: 0.05em;
   }
-
+  
   .tag--default {
     background-color: white;
     color: var(--color-text);
@@ -187,31 +175,31 @@ const base = import.meta.env.BASE_URL;
     background-color: white;
     color: var(--color-primary);
   }
-
+  
   .tag--orange {
     background-color: white;
     color: var(--color-accent);
   }
-
+  
   /* Body */
   .product-card__body {
     padding: var(--space-6);
   }
-
+  
   .product-card__title {
     font-size: var(--text-xl);
     font-weight: 700;
     color: var(--color-dark);
     margin-bottom: var(--space-2);
   }
-
+  
   .product-card__description {
     font-size: var(--text-sm);
     color: var(--color-text-muted);
     line-height: 1.6;
     margin-bottom: var(--space-4);
   }
-
+  
   .product-card__footer {
     display: flex;
     justify-content: space-between;
@@ -224,24 +212,24 @@ const base = import.meta.env.BASE_URL;
   .product-card__footer svg {
     transition: var(--transition);
   }
-
+  
   .product-card:hover .product-card__footer svg {
     transform: translateX(4px);
   }
-
+  
   @media (min-width: 768px) {
     .products__header {
       flex-direction: row;
       justify-content: space-between;
       align-items: flex-end;
     }
-
+    
     .products__title {
       font-size: var(--text-4xl);
     }
-
+    
     .products__grid {
       grid-template-columns: repeat(3, 1fr);
     }
   }
-</style>
+  </style>

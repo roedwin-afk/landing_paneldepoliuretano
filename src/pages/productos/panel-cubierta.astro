@@ -1,11 +1,10 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import Navbar from "../../components/layout/Navbar.astro";
-import Footer from "../../components/layout/Footer.astro";
 import CTASection from "../../components/sections/CTASection.astro";
 import ProductoHero from "../../components/sections/productos/producto/ProductoHero.astro";
 import ProductoSpecs from "../../components/sections/productos/producto/ProductoSpecs.astro";
 import ProductoAplicaciones from "../../components/sections/productos/producto/ProductoAplicaciones.astro";
+import ProductosRelacionados from "../../components/sections/productos/producto/ProductosRelacionados.astro";
 import { texts } from "../../content/texts";
 
 const producto = texts.productos.items[0];
@@ -27,6 +26,7 @@ const producto = texts.productos.items[0];
     />
     <ProductoSpecs specs={producto.specs} />
     <ProductoAplicaciones applications={producto.applications} />
+    <ProductosRelacionados currentSlug={producto.slug} />
     <CTASection />
   </main>
 </Layout>
