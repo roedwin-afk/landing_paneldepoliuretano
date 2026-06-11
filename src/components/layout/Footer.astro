@@ -7,13 +7,14 @@ import { Image } from "astro:assets";
 import logo from "../../assets/logo.svg";
 
 const { footer } = texts;
+const base = import.meta.env.BASE_URL;
 ---
 
 <footer class="footer">
   <div class="container footer__inner">
     <!-- Columna 1: Marca -->
     <div class="footer__brand">
-      <a href="/" class="footer__logo">
+      <a href={base} class="footer__logo">
         <!-- PANEL<span class="footer__logo--accent">DE</span>POLIURETANO<span
           class="footer__logo--muted">.com</span
         > -->
@@ -23,7 +24,7 @@ const { footer } = texts;
           width={200}
           height={50}
           class="footer__logo-img"
-          format="webp"
+          format="svg"
           quality={85}
           loading="eager"
         />

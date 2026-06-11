@@ -120,7 +120,7 @@ export const texts = {
       "Especialistas en soluciones de cerramiento industrial y eficiencia energética para el mercado profesional.",
     relatedTitle: "Dominios Relacionados",
     contactTitle: "Contacto",
-    email: "ingenieria@paneldepoliuretano.com",
+    email: "ventas@mequipo.com",
     support: "Avenida Presidente Masaryk No. 61, Int. 901, Polanco V Sección, C.P. 11560, Miguel Hidalgo, Mexico City, Mexico",
     googleMapsHref: "https://www.google.com/maps/search/?api=1&query=Avenida+Presidente+Masaryk+61+Polanco+Ciudad+de+Mexico",
     copyright: `© ${new Date().getFullYear()} paneldepoliuretano.com - Todos los derechos reservados.`,
@@ -149,7 +149,7 @@ export const texts = {
         "Avenida Presidente Masaryk No. 61, Int. 901, Polanco V Sección, C.P. 11560, Miguel Hidalgo, Ciudad de México",
       mapsHref:
         "https://maps.google.com/?cid=15759084979067732314&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ",
-      email: "ingenieria@paneldepoliuretano.com",
+      email: "ventas@mequipo.com",
       hours: "Lunes a Viernes, 9:00 — 18:00 hrs",
     },
     map: {

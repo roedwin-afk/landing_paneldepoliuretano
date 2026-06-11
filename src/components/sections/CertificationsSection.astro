@@ -44,17 +44,15 @@ const icons = {
 
 <style>
   .certifications {
-    padding-block: var(--space-16);
-    background-color: var(--color-dark);
-    color: white;
-    border-radius: var(--space-4);
-    width: 76rem;
+    width: 100%;
     margin-inline: auto;
+    margin-bottom: var(--space-10);
   }
 
   .certifications__header {
     text-align: center;
     margin-bottom: var(--space-10);
+    color;
   }
 
   .certifications__title {
@@ -67,7 +65,7 @@ const icons = {
 
   .certifications__description {
     font-size: var(--text-sm);
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--color-text);
     max-width: 480px;
     margin-inline: auto;
     line-height: 1.6;
@@ -85,12 +83,15 @@ const icons = {
     align-items: center;
     gap: var(--space-3);
     text-align: center;
-    opacity: 0.75;
     transition: var(--transition);
+    /* padding-block: var(--space-16); */
+    background-color: var(--color-dark);
+    color: white;
+    border-radius: var(--space-4);
   }
 
   .certifications__item:hover {
-    opacity: 1;
+    opacity: 0.85;
   }
 
   .certifications__icon {
