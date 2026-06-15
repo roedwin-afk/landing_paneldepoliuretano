@@ -41,7 +41,7 @@ const base = import.meta.env.BASE_URL;
 
     <!-- Footer del panel -->
     <div class="mobile-menu__footer">
-      <a href="/#contacto" class="mobile-menu__cta">
+      <a href={`${base}contacto`} class="mobile-menu__cta">
         {texts.nav.cta}
       </a>
     </div>
@@ -55,11 +55,13 @@ const base = import.meta.env.BASE_URL;
     z-index: 1000;
     pointer-events: none;
     visibility: hidden;
+    transition: visibility 0s ease 0.4s;
   }
 
   .mobile-menu.is-open {
     pointer-events: all;
     visibility: visible;
+    transition: visibility 0s ease 0s;
   }
 
   .mobile-menu__backdrop {
@@ -67,7 +69,7 @@ const base = import.meta.env.BASE_URL;
     inset: 0;
     background-color: rgb(0 0 0 / 0.5);
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.4s ease;
   }
 
   .mobile-menu.is-open .mobile-menu__backdrop {

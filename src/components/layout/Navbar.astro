@@ -61,19 +61,24 @@ const base = import.meta.env.BASE_URL;
     background-color: var(--color-surface);
     border-bottom: 1px solid var(--color-border);
   }
-
+  
   .navbar__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 4rem;
   }
-
+  
   .navbar__logo {
     font-size: var(--text-xl);
     font-weight: 800;
     color: var(--color-primary);
     letter-spacing: -0.02em;
+  }
+  .navbar__logo-img {
+    display: block;
+    height: 3.5rem;
+    width: auto;
   }
 
   .navbar__logo--accent {

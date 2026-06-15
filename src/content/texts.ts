@@ -27,7 +27,7 @@ export const texts = {
   comparative: {
     title: "Análisis Comparativo de Núcleos",
     subtitle:
-      "Diferencias técnicas entre PUR, PIR y Lana de Roca según normativa europea.",
+      "Diferencias técnicas entre PUR, PIR y Lana de Roca según la norma EN 13501-1.",
     headers: {
       property: "Propiedad Técnica",
       pur: "PUR (Poliuretano)",
@@ -121,7 +121,7 @@ export const texts = {
     relatedTitle: "Dominios Relacionados",
     contactTitle: "Contacto",
     email: "ventas@mequipo.com",
-    support: "Avenida Presidente Masaryk No. 61, Int. 901, Polanco V Sección, C.P. 11560, Miguel Hidalgo, Mexico City, Mexico",
+    support: "Avenida Presidente Masaryk No. 61, Int. 901, Polanco V Sección, C.P. 11560, Miguel Hidalgo, Ciudad de México, México",
     googleMapsHref: "https://www.google.com/maps/search/?api=1&query=Avenida+Presidente+Masaryk+61+Polanco+Ciudad+de+Mexico",
     copyright: `© ${new Date().getFullYear()} paneldepoliuretano.com - Todos los derechos reservados.`,
   },
@@ -145,12 +145,16 @@ export const texts = {
     info: {
       phone: "+52 55 9990 3546",
       phoneHref: "tel:+525599903546",
-      address:
-        "Avenida Presidente Masaryk No. 61, Int. 901, Polanco V Sección, C.P. 11560, Miguel Hidalgo, Ciudad de México",
-      mapsHref:
-        "https://maps.google.com/?cid=15759084979067732314&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ",
+      address: "Avenida Presidente Masaryk No. 61, Int. 901, Polanco V Sección, C.P. 11560, Miguel Hidalgo, Ciudad de México",
+      mapsHref: "https://maps.google.com/?cid=15759084979067732314&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ",
       email: "ventas@mequipo.com",
       hours: "Lunes a Viernes, 9:00 — 18:00 hrs",
+      socials: {
+        facebook: "https://facebook.com/mequipo",
+        instagram: "https://instagram.com/mequipo",
+        linkedin: "https://linkedin.com/company/mequipo",
+        whatsapp: "https://wa.me/525599903546",
+      },
     },
     map: {
       lat: 19.4326,

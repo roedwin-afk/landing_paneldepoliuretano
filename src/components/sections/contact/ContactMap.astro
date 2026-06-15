@@ -6,30 +6,66 @@ const { map } = texts.contact;
 ---
 
 <Animate animation="fade-left" delay={200}>
-    <div class="map-card">
-        <div id="map" class="map-card__map"></div>
+  <div class="map-card">
+    <div class="map-overlay" id="map-overlay">
+      <span class="map-overlay__text">Toca para interactuar con el mapa</span>
     </div>
+    <div id="map" class="map-card__map"></div>
+  </div>
 </Animate>
 
 <style>
-    .map-card {
-        background-color: var(--color-surface);
-        border: 1px solid var(--color-border);
-        border-radius: var(--radius-xl);
-        overflow: hidden;
-        box-shadow: var(--shadow-md);
-    }
+  .map-card {
+    position: relative;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+  .map-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1000;
+    background-color: rgb(0 0 0 / 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
 
+  .map-overlay.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .map-overlay__text {
+    background-color: white;
+    color: var(--color-dark);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+  }
+
+  .map-card__map {
+    height: 24rem;
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .map-overlay {
+      display: none; /* solo en móvil */
+    }
+  }
+
+  @media (min-width: 1024px) {
     .map-card__map {
-        height: 24rem;
-        width: 100%;
+      height: 32rem;
     }
-
-    @media (min-width: 1024px) {
-        .map-card__map {
-            height: 32rem;
-        }
-    }
+  }
 </style>
 
 <script
@@ -62,14 +98,29 @@ const { map } = texts.contact;
   async function initMap() {
     const mapEl = document.getElementById("map");
     if (!mapEl) return;
-    if (mapEl._leaflet_id) return;
+
+    // Destruir instancia anterior
+    if (mapEl._leaflet_id) {
+      delete mapEl._leaflet_id;
+      mapEl.innerHTML = "";
+    }
 
     const L = await loadLeaflet();
+
+    // Esperar 300ms para que View Transitions y Animate terminen
+    await new Promise((resolve) => setTimeout(resolve, 300));
+
+    // Forzar recalculo de layout
+    mapEl.style.display = "none";
+    mapEl.offsetHeight; // trigger reflow
+    mapEl.style.display = "";
 
     const leafletMap = L.map("map", {
       center: [lat, lng],
       zoom: zoom,
       scrollWheelZoom: false,
+      dragging: !L.Browser.mobile,
+      tap: false,
       zoomControl: true,
     });
 
@@ -113,11 +164,34 @@ const { map } = texts.contact;
       )
       .openPopup();
 
-    // Fix crítico: forzar recalculo de tamaño después de que el DOM esté listo
-    setTimeout(() => {
-      leafletMap.invalidateSize();
-    }, 100);
+    // Overlay móvil
+    const overlay = document.getElementById("map-overlay");
+    if (overlay) {
+      overlay.addEventListener("click", () => {
+        overlay.classList.add("is-hidden");
+        leafletMap.dragging.enable();
+      });
+    }
+
+    if (L.Browser.mobile) {
+      mapEl.addEventListener("touchstart", () => {
+        leafletMap.dragging.enable();
+      });
+    }
+
+    window.addEventListener("resize", () => leafletMap.invalidateSize());
+
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) leafletMap.invalidateSize();
+    });
+
+    // Múltiples invalidaciones escalonadas
+    setTimeout(() => leafletMap.invalidateSize(), 50);
+    setTimeout(() => leafletMap.invalidateSize(), 200);
+    setTimeout(() => leafletMap.invalidateSize(), 500);
   }
 
+  // Cubrir ambos casos: carga inicial y navegación con View Transitions
   document.addEventListener("astro:page-load", initMap);
+  document.addEventListener("astro:after-swap", initMap);
 </script>
