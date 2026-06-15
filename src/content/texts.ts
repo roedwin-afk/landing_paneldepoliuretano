@@ -9,6 +9,7 @@ export const texts = {
     products: "Productos",
     certifications: "Certificaciones",
     blog: "Blog",
+    faq: "FAQ",
     contact: "Contacto",
     cta: "Solicitar Cotización Técnica",
   },

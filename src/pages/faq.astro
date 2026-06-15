@@ -1,0 +1,517 @@
+---
+// src/pages/faq.astro  (o donde corresponda en tu estructura)
+import Layout from "../layouts/Layout.astro";
+
+const categories = [
+  {
+    id: "compra",
+    label: "Compra y Proveedores",
+    faqs: [
+      {
+        pregunta: "¿Dónde comprar panel de poliuretano en México?",
+        respuesta:
+          "Los paneles de poliuretano se adquieren directamente con proveedores especializados en cerramiento industrial. En Ciudad de México, paneldepoliuretano.com comercializa paneles PUR, PIR y Lana de Roca con asesoría técnica personalizada para proyectos industriales, alimentarios y logísticos. Para cotización, puede contactarnos por formulario o WhatsApp.",
+      },
+      {
+        pregunta: "¿Qué proveedores de panel sándwich de poliuretano hay en Ciudad de México?",
+        respuesta:
+          "En Ciudad de México existen distribuidores especializados en paneles sándwich para uso industrial. Al evaluar un proveedor, verifique que cuente con paneles certificados (Marcado CE EN 14509), disponibilidad en distintos espesores (30–200 mm), opciones PUR y PIR según el tipo de proyecto, y soporte técnico para la instalación.",
+      },
+      {
+        pregunta: "¿Existen empresas que venden paneles de poliuretano con envío a domicilio?",
+        respuesta:
+          "Sí. Algunos proveedores de panel de poliuretano ofrecen logística de entrega según el volumen y la ubicación del proyecto. Dado el peso y las dimensiones del material, el envío suele coordinarse directamente con el proveedor. Se recomienda solicitar cotización indicando la dirección de entrega y el metraje requerido.",
+      },
+      {
+        pregunta: "¿Dónde comprar panel de poliuretano para muro en Monterrey?",
+        respuesta:
+          "Para proyectos de muro en Monterrey, busque proveedores con experiencia en paneles sándwich de fachada con núcleo PUR o PIR. Los criterios clave son: espesor adecuado al requerimiento térmico, tipo de revestimiento (liso o perfilado) y cumplimiento de normativa de reacción al fuego según el uso del inmueble.",
+      },
+    ],
+  },
+  {
+    id: "comparativas",
+    label: "Comparativas y Selección",
+    faqs: [
+      {
+        pregunta: "¿Cuáles son las mejores marcas de panel de poliuretano para construcción en México?",
+        respuesta:
+          "En el mercado mexicano existen fabricantes nacionales e importadores europeos de paneles sándwich. Más allá de la marca, los factores determinantes son: conductividad térmica (λ ≤ 0.022 W/mK), clasificación de reacción al fuego (Euroclases), densidad del núcleo (≥ 40 kg/m³), certificación Marcado CE EN 14509 y disponibilidad de espesores para la temperatura objetivo del proyecto.",
+      },
+      {
+        pregunta: "¿Qué opinan los profesionales sobre los paneles de poliuretano para aislamiento térmico?",
+        respuesta:
+          "Los paneles de poliuretano son el estándar de la industria para aislamiento térmico en construcción industrial. Su relación entre conductividad térmica (λ ≈ 0.022 W/mK) y espesor los hace más eficientes que el poliestireno expandido (EPS) o la lana de roca para aplicaciones de frío. La principal consideración técnica es elegir entre PUR estándar y PIR cuando se requiere mejor comportamiento frente al fuego.",
+      },
+      {
+        pregunta: "¿Cuál es la diferencia entre panel PUR y PIR?",
+        respuesta:
+          "Ambos tienen núcleo de poliuretano expandido, pero el PIR se produce con mayor proporción de isocianato, lo que le otorga mejor resistencia al fuego (Euroclase B-s1, d0) y mayor estabilidad térmica hasta +100 °C. El PUR es la opción estándar para la mayoría de cámaras frías; el PIR es preferible cuando las normativas exigen clasificación de reacción al fuego más estricta.",
+      },
+      {
+        pregunta: "¿Cómo elegir el grosor de panel para congelación?",
+        respuesta:
+          "El grosor depende de la temperatura interior objetivo: para refrigeración (0 °C a 8 °C) se usan paneles de 60–100 mm; para congelación (−18 °C a −25 °C), de 120–150 mm; para ultracongelación (por debajo de −30 °C), de 150–200 mm. Siempre se debe realizar un cálculo de carga térmica considerando el volumen del recinto, la carga interna y la temperatura exterior promedio del sitio.",
+      },
+    ],
+  },
+  {
+    id: "beneficios",
+    label: "Beneficios y Aplicaciones",
+    faqs: [
+      {
+        pregunta: "¿Qué ventajas ofrecen los paneles de poliuretano para techos?",
+        respuesta:
+          "Los paneles de poliuretano para cubierta ofrecen: alta eficiencia térmica con conductividad λ ≈ 0.022 W/mK, instalación rápida en sistema modular, rigidez estructural gracias al perfil grecado (3 o 5 grecas), rango de temperatura operativo de −40 °C a +100 °C en versión PIR, y certificación Marcado CE EN 14509. Son ideales para naves industriales, logísticas y agroindustriales con grandes luces entre apoyos.",
+      },
+      {
+        pregunta: "¿Cómo se instala panel de poliuretano en una cámara frigorífica?",
+        respuesta:
+          "La instalación de panel de poliuretano en cámara frigorífica sigue estos pasos: planificación del layout y cálculo de carga térmica según temperatura objetivo; preparación de la estructura soporte; montaje de paneles de piso (si aplica); instalación de paneles de pared con unión machihembrada para garantizar estanqueidad; colocación de paneles de techo; sellado de juntas y encuentros; e instalación de puertas frigoríficas y equipos de refrigeración. Se recomienda contratar instaladores especializados para garantizar el cumplimiento de normativas TIF/FDA.",
+      },
+      {
+        pregunta: "¿Para qué industrias se recomienda el panel de poliuretano?",
+        respuesta:
+          "Se recomienda para industria alimentaria (procesamiento, empaque y conservación), sector farmacéutico (medicamentos y vacunas), agroindustria (frutas, verduras, lácteos), logística y distribución refrigerada, naves industriales y logísticas, y cualquier operación que requiera control preciso de temperatura o sectorización cortafuego.",
+      },
+      {
+        pregunta: "¿Qué normativas certifican los paneles de poliuretano?",
+        respuesta:
+          "Los paneles de calidad industrial deben contar con: Marcado CE según norma EN 14509 (paneles sándwich autoportantes); clasificación de reacción al fuego según EN 13501-1 (Euroclases A1 a F); y certificaciones adicionales según el uso, como ISO 9001/14001, EPD para proyectos LEED o BREEAM, y TIF/FDA para aplicaciones alimentarias y farmacéuticas.",
+      },
+    ],
+  },
+  {
+    id: "precios",
+    label: "Precios y Costos",
+    faqs: [
+      {
+        pregunta: "¿Cuáles son los precios promedio de paneles de poliuretano por metro cuadrado?",
+        respuesta:
+          "El precio de los paneles de poliuretano por metro cuadrado varía según el espesor, tipo de núcleo (PUR o PIR), tipo de revestimiento y el proveedor. A mayor espesor y mayor especificación técnica (PIR vs PUR), mayor el costo unitario. Para obtener un precio ajustado a su proyecto, solicite cotización indicando las dimensiones, el uso previsto y la temperatura de operación requerida.",
+      },
+      {
+        pregunta: "¿Cuánto cuesta por metro cuadrado el panel aislante de poliuretano?",
+        respuesta:
+          "El costo por m² del panel aislante de poliuretano depende principalmente del espesor (disponible desde 30 mm hasta 200 mm) y el tipo de núcleo. El precio incluye el panel con revestimiento metálico y el sistema de unión. La instalación se cotiza por separado según la complejidad del proyecto. Contacte a nuestro equipo técnico para recibir una propuesta detallada.",
+      },
+      {
+        pregunta: "¿Cuánto cuesta instalar paneles para cuarto frío?",
+        respuesta:
+          "El costo de instalación depende del tamaño del recinto, la complejidad del diseño (número de puertas, tipo de piso, esquinas especiales) y la ubicación del proyecto. Se recomienda solicitar una propuesta técnica integral que incluya visita, planos y presupuesto detallado con material e instalación.",
+      },
+    ],
+  },
+  {
+    id: "tecnico",
+    label: "Especificaciones Técnicas",
+    faqs: [
+      {
+        pregunta: "¿Qué es un panel de poliuretano y para qué se usa?",
+        respuesta:
+          "Un panel de poliuretano (también llamado panel sándwich) es un sistema constructivo compuesto por dos revestimientos metálicos y un núcleo rígido de espuma de poliuretano (PUR) o polisocianurato (PIR). Se utiliza para paredes, techos y suelos de cámaras frigoríficas, naves industriales, almacenes logísticos y cualquier construcción que requiera control térmico, resistencia al fuego o aislamiento acústico.",
+      },
+      {
+        pregunta: "¿Cuáles son los tipos de paneles de poliuretano disponibles?",
+        respuesta:
+          "Los principales tipos son: Panel PUR (poliuretano estándar) para cámaras frigoríficas y naves industriales en rangos de −40 °C a +80 °C; Panel PIR (polisocianurato) con mejor resistencia al fuego (Euroclase B-s1, d0) para naves con normativa estricta hasta +100 °C; y Panel de Lana de Roca para sectorización cortafuego certificada EI30 a EI240 con clasificación A1 incombustible.",
+      },
+      {
+        pregunta: "¿Qué espesores de panel están disponibles?",
+        respuesta:
+          "Los paneles están disponibles desde 30 mm hasta 200 mm de espesor. Para refrigeración (0 °C a 8 °C) se utilizan espesores de 60–100 mm; para congelación (−18 °C o menor) se recomienda desde 120 mm en adelante. Los paneles de Lana de Roca están disponibles entre 40 y 100 mm.",
+      },
+      {
+        pregunta: "¿Los paneles cumplen normativas internacionales?",
+        respuesta:
+          "Sí. Los paneles cumplen con normativas internacionales como TIF y FDA, lo que los habilita para uso en industria alimentaria, farmacéutica y cadena de frío. También son compatibles con clasificación contra fuego EN 13501-1 en versión PIR y Lana de Roca, y cuentan con Marcado CE EN 14509.",
+      },
+    ],
+  },
+];
+---
+
+<Layout
+  title="Preguntas Frecuentes"
+  description="Resuelva sus dudas sobre paneles de poliuretano PUR, PIR y Lana de Roca. Preguntas frecuentes sobre compra, instalación, normativas y precios."
+>
+  <main>
+
+    <!-- Hero -->
+    <section class="faq-hero">
+      <div class="container">
+        <span class="faq-hero__badge">CENTRO DE AYUDA</span>
+        <h1 class="faq-hero__title">Preguntas Frecuentes</h1>
+        <p class="faq-hero__subtitle">
+          Respuestas técnicas sobre paneles PUR, PIR y Lana de Roca para su proyecto industrial.
+        </p>
+      </div>
+    </section>
+
+    <!-- Filtros por categoría -->
+    <section class="faq-filters">
+      <div class="container">
+        <div class="faq-filters__list" role="tablist">
+          <button
+            class="faq-filter__btn is-active"
+            data-category="all"
+            role="tab"
+            aria-selected="true"
+          >
+            Todas
+          </button>
+          {categories.map((cat) => (
+            <button
+              class="faq-filter__btn"
+              data-category={cat.id}
+              role="tab"
+              aria-selected="false"
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQs por categoría -->
+    <section class="faq-content">
+      <div class="container">
+        {categories.map((cat) => (
+          <div class="faq-group" data-group={cat.id}>
+            <h2 class="faq-group__title">
+              <span class="faq-group__line"></span>
+              {cat.label}
+            </h2>
+            <div class="faq-list">
+              {cat.faqs.map((item, i) => (
+                <div class="faq-item" data-index={i}>
+                  <button class="faq-item__trigger" aria-expanded="false">
+                    <span class="faq-item__question">{item.pregunta}</span>
+                    <span class="faq-item__icon" aria-hidden="true">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </span>
+                  </button>
+                  <div class="faq-item__body">
+                    <p class="faq-item__answer">{item.respuesta}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="faq-cta">
+      <div class="container faq-cta__inner">
+        <div>
+          <h2 class="faq-cta__title">¿No encontró lo que buscaba?</h2>
+          <p class="faq-cta__text">
+            Nuestro equipo técnico está disponible para asesorarle en la selección del panel ideal para su aplicación.
+          </p>
+        </div>
+        <a href="/contacto" class="faq-cta__btn">
+          Solicitar Cotización Técnica →
+        </a>
+      </div>
+    </section>
+
+  </main>
+</Layout>
+
+<style>
+  /* ─── Hero ─────────────────────────────────────────────────────── */
+  .faq-hero {
+    background-color: var(--color-primary);
+    padding-block: var(--space-16) var(--space-12);
+  }
+
+  .faq-hero__badge {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+    background-color: rgb(249 115 22 / 0.15);
+    border: 1px solid rgb(249 115 22 / 0.3);
+    border-radius: var(--radius-sm);
+    padding: 0.25rem 0.75rem;
+    margin-bottom: var(--space-4);
+  }
+
+  .faq-hero__title {
+    font-size: var(--text-4xl);
+    font-weight: 900;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-4);
+  }
+
+  .faq-hero__subtitle {
+    font-size: var(--text-lg);
+    color: rgb(255 255 255 / 0.7);
+    max-width: 42rem;
+  }
+
+  /* ─── Filtros ───────────────────────────────────────────────────── */
+  .faq-filters {
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .faq-filters__list {
+    display: flex;
+    gap: var(--space-2);
+    overflow-x: auto;
+    padding-block: var(--space-3);
+    scrollbar-width: none;
+  }
+
+  .faq-filters__list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .faq-filter__btn {
+    flex-shrink: 0;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text-muted);
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-2) var(--space-4);
+    transition: var(--transition);
+    white-space: nowrap;
+  }
+
+  .faq-filter__btn:hover {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+
+  .faq-filter__btn.is-active {
+    background-color: var(--color-primary);
+    color: #ffffff;
+    border-color: var(--color-primary);
+  }
+
+  /* ─── Contenido ─────────────────────────────────────────────────── */
+  .faq-content {
+    background-color: var(--color-bg);
+    padding-block: var(--space-16);
+  }
+
+  .faq-group {
+    margin-bottom: var(--space-16);
+    transition: opacity 0.3s ease;
+  }
+
+  .faq-group.is-hidden {
+    display: none;
+  }
+
+  .faq-group__title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-bottom: var(--space-6);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .faq-group__line {
+    display: block;
+    width: 3rem;
+    height: 3px;
+    background-color: var(--color-accent);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  /* ─── Items ─────────────────────────────────────────────────────── */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .faq-item {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .faq-item:has(.faq-item__trigger[aria-expanded="true"]) {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgb(30 58 138 / 0.08);
+  }
+
+  .faq-item__trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-6);
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .faq-item__question {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--color-dark);
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .faq-item__icon {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+    transition: transform 0.3s ease, color 0.2s ease;
+  }
+
+  .faq-item__trigger[aria-expanded="true"] .faq-item__icon {
+    transform: rotate(180deg);
+    color: var(--color-primary);
+  }
+
+  .faq-item__body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease;
+  }
+
+  .faq-item__body > * {
+    overflow: hidden;
+  }
+
+  .faq-item__trigger[aria-expanded="true"] ~ .faq-item__body {
+    grid-template-rows: 1fr;
+  }
+
+  .faq-item__answer {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    padding: 0 var(--space-6) var(--space-6);
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-4);
+  }
+
+  /* ─── CTA ───────────────────────────────────────────────────────── */
+  .faq-cta {
+    background-color: var(--color-dark);
+    padding-block: var(--space-16);
+  }
+
+  .faq-cta__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    align-items: flex-start;
+  }
+
+  .faq-cta__title {
+    font-size: var(--text-2xl);
+    font-weight: 800;
+    color: #ffffff;
+    text-transform: uppercase;
+    margin-bottom: var(--space-2);
+  }
+
+  .faq-cta__text {
+    font-size: var(--text-base);
+    color: var(--color-dark-muted);
+    max-width: 36rem;
+  }
+
+  .faq-cta__btn {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--color-accent);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: var(--text-sm);
+    padding: var(--space-4) var(--space-8);
+    border-radius: var(--radius-md);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    transition: var(--transition);
+    flex-shrink: 0;
+  }
+
+  .faq-cta__btn:hover {
+    background-color: var(--color-accent-dark);
+  }
+
+  @media (min-width: 768px) {
+    .faq-hero__title {
+      font-size: var(--text-5xl);
+    }
+
+    .faq-cta__inner {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+</style>
+
+<script>
+  function initFaq() {
+    // ── Acordeón ──────────────────────────────────────────────────
+    document.querySelectorAll<HTMLButtonElement>(".faq-item__trigger").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const isOpen = btn.getAttribute("aria-expanded") === "true";
+        btn.setAttribute("aria-expanded", String(!isOpen));
+      });
+    });
+
+    // ── Filtros por categoría ─────────────────────────────────────
+    const filterBtns = document.querySelectorAll<HTMLButtonElement>(".faq-filter__btn");
+    const groups = document.querySelectorAll<HTMLElement>(".faq-group");
+
+    filterBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const category = btn.dataset.category;
+
+        // Actualizar botones
+        filterBtns.forEach((b) => {
+          b.classList.remove("is-active");
+          b.setAttribute("aria-selected", "false");
+        });
+        btn.classList.add("is-active");
+        btn.setAttribute("aria-selected", "true");
+
+        // Mostrar / ocultar grupos
+        groups.forEach((group) => {
+          if (category === "all" || group.dataset.group === category) {
+            group.classList.remove("is-hidden");
+          } else {
+            group.classList.add("is-hidden");
+          }
+        });
+      });
+    });
+  }
+
+  document.addEventListener("astro:page-load", initFaq);
+</script>
