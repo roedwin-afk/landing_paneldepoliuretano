@@ -2,23 +2,70 @@ import { defineBlogConfig } from 'astro-blog-kit';
 
 export default defineBlogConfig({
   wpUrl: import.meta.env.WP_API_URL || 'http://paneldetecho.local/',
-  postsPerPage: 6,
-  defaultLayout: 'grid',
-  locale: 'es',
+  postsPerPage:  5,
+  defaultLayout: 'magazine',
+  locale:        'es',
+
   theme: {
-    accent: '#facc15',
-    background: '#ffffff',
-    surface: '#f8f8f8',
-    text: '#0a0a0a',
-    muted: '#6b7280',
-    mutedLight: '#4b5563',
-    border: '#e5e7eb',
-    black: '#0a0a0a',
-    white: '#ffffff',
-    fontHeading: 'Georgia, serif',
-    fontBody: 'system-ui, sans-serif',
-    fontMono: 'monospace',
-    fontDisplay: 'Georgia, serif',
+    accent:       '#facc15',
+    background:   '#ffffff',
+    surface:      '#f8f8f8',
+    text:         '#0a0a0a',
+    muted:        '#6b7280',
+    mutedLight:   '#4b5563',
+    border:       '#e5e7eb',
+    black:        '#0a0a0a',
+    white:        '#ffffff',
+    fontHeading:  'Georgia, serif',
+    fontBody:     'system-ui, sans-serif',
+    fontMono:     'monospace',
+    fontDisplay:  'Georgia, serif',
     containerMax: '1200px',
+  },
+
+  // ── Hero ──────────────────────────────────────────────────────
+  // Sitio i18n: un objeto por locale.
+  // Sitio monolingüe: puedes usar el formato plano:
+  //   hero: { tagline: 'Our Blog', titleLine1: 'Latest', ... }
+  hero: {
+    en: {
+      tagline:     'Our Blog',
+      titleLine1:  'Latest',
+      titleLine2:  'Articles',
+      description: 'Welcome to our blog.',
+    },
+    es: {
+      tagline:     'Nuestro Blog',
+      titleLine1:  'Últimos',
+      titleLine2:  'Artículos',
+      description: 'Bienvenido a nuestro blog.',
+    },
+  },
+
+  // ── UI labels ────────────────────────────────────────────────
+  // Los labels de texto van por locale.
+  // Los campos visuales (colores, paginationStyle) son compartidos:
+  // ponlos en cualquier locale y aplican a todos.
+  ui: {
+    en: {
+      readMoreLabel: 'Read more →',
+      btnPrev:       'Previous',
+      btnNext:       'Next',
+      // ── Colores compartidos (van aquí una sola vez) ──────────
+      commentButtonColor:     'var(--bk-accent)',
+      commentButtonTextColor: 'var(--bk-black)',
+      paginationStyle:        'minimal',
+      // paginationBtnBg:         '#facc15',
+      // paginationBtnText:       '#0a0a0a',
+      // paginationBtnHoverBg:    '#0a0a0a',
+      // paginationBtnHoverText:  '#ffffff',
+      // paginationActiveBg:      '#facc15',
+      // paginationActiveText:    '#0a0a0a',
+    },
+    es: {
+      readMoreLabel: 'Leer más →',
+      btnPrev:       'Anterior',
+      btnNext:       'Siguiente',
+    },
   },
 });

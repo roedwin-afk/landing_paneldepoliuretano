@@ -1,17 +1,14 @@
 ---
 import { BlogPost, Comments, CommentForm } from "astro-blog-kit/components";
 import { createWPClient, getStaticPathsForPosts } from "astro-blog-kit/utils";
+import { resolveHero, resolveUI } from 'astro-blog-kit';
 import config from "../../../blog.config";
 import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
-  try {
-    const wp = createWPClient(config.wpUrl);
-    const posts = await wp.getAllPosts();
-    return getStaticPathsForPosts(posts);
-  } catch {
-  console.warn("WP no disponible en build");
-}
+  const wp = createWPClient(config.wpUrl);
+  const posts = await wp.getAllPosts();
+  return getStaticPathsForPosts(posts);
 }
 
 const { post } = Astro.props;
@@ -19,21 +16,25 @@ const { post } = Astro.props;
 const wp = createWPClient(config.wpUrl);
 const comments = post.id ? await wp.getComments(post.id) : [];
 
-const t = {
+const locale = config.locale ?? 'en';
+const hero = resolveHero(config.hero, locale);
+const ui = resolveUI(config.ui, locale);
+
+const bt = {
   blog: {
-    tagline: "Nuestro Blog",
-    title_line1: "Últimos",
-    title_line2: "Artículos",
-    description: "Bienvenido a nuestro blog.",
-    btncta: "Leer más",
-    btn_prev: "Anterior",
-    btn_next: "Siguiente",
+    tagline:     hero.tagline,
+    title_line1: hero.titleLine1,
+    title_line2: hero.titleLine2,
+    description: hero.description,
+    btncta:      ui.readMoreLabel,
+    btn_prev:    ui.btnPrev,
+    btn_next:    ui.btnNext,
   },
 };
 ---
 
 <Layout>
-  <BlogPost post={post} t={t} lang={config.locale ?? "en"} />
+  <BlogPost post={post} t={bt} lang={config.locale ?? "en"} />
   <Comments comments={comments} postId={post.id ?? 0} />
   <CommentForm postId={post.id ?? 0} apiRoute="/api/comments" />
 </Layout>
